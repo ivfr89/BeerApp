@@ -1,0 +1,6 @@
+include ':testShared'
+include ':data'
+include ':usecases'
+include ':domain'
+rootProject.name='BeerApp'
+include ':app'

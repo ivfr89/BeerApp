@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav.xml"
+    app:startDestination="@id/beerListFragment">
+
+    <fragment
+        android:id="@+id/beerListFragment"
+        android:name="com.developer.ivan.beerapp.ui.main.fragments.BeerListFragment"
+        android:label="@string/beer_list"
+        tools:layout="@layout/fragment_beer_list" >
+        <action
+            android:id="@+id/action_fromList_toDetail"
+            app:destination="@id/beerDetailFragment"
+            app:enterAnim="@anim/translate_in"
+            app:exitAnim="@anim/translate_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/beerDetailFragment"
+        android:name="com.developer.ivan.beerapp.ui.main.fragments.BeerDetailFragment"
+        tools:layout="@layout/fragment_beer_detail">
+        <argument
+            android:name="uibeer"
+            app:argType="com.developer.ivan.beerapp.ui.main.UIBeer" />
+    </fragment>
+</navigation>

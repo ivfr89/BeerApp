@@ -1,0 +1,18 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    def kotlinGradle = rootProject.ext.kotlin
+    def testGradle = rootProject.ext.test
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(":domain")
+    implementation project(":data")
+    implementation project(":testShared")
+    implementation kotlinGradle.values()
+
+    testImplementation testGradle.values()
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
