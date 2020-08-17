@@ -1,4 +1,4 @@
-[BeerApp]("images/ic_launcher.round.png")
+![BeerApp](images/ic_launcher.round.png)
 
 # Introducción
 
