@@ -16,7 +16,7 @@ BeerApp, aplicación de cervezas utilizando arquitectura Clean, usando como patr
 - Navigation (Jetpack)
 - Moshi para el parseo del Json
 
-## Estructura del proyecto
+# Estructura del proyecto
 
 
 Es una arquitectura clean, siguiendo un patrón MVVM de un único estado.
@@ -125,7 +125,7 @@ Cada capa tiene un modelo diferente: Beer tiene: un modelo de UI , un modelo del
 
 
 
-#Testing
+# Testing
 
 Se ha realizado Unit testing del repositorio, casos de uso y un par de test del BeerListViewModel
 
@@ -134,18 +134,20 @@ Se ha realizado Unit testing del repositorio, casos de uso y un par de test del 
 ![Test UseCases](images/test3.png)
 
 
-# Algunas características
+# Imágenes
 
-##Lista y detalle con animaciones
-![lista y detalle 1](images/image1.png)
-![lista y detalle 2](images/image2.png)
-![lista y detalle 3](images/image3.png)
-![lista y detalle 4](images/image4.png)
+Imágenes del app
 
-##Modo oscuro
-[Modo oscuro lista](images/darkmode1.png)
-[Modo oscuro detalle](images/darkmode2.png)
+## Lista y detalle con animaciones
+![](images/image1.png)
+![](images/image2.png)
+![](images/image3.png)
+![](images/image4.png)
 
-##Rotación en cualquier punto
-[Rotación 1](images/darkmoderotate1.png)
-[Rotación 2](images/darkmoderotate2.png)
+## Modo oscuro
+![](images/darkmode1.png)
+![](images/darkmode2.png)
+
+## Rotación en cualquier punto
+![](images/darkmoderotate1.png)
+![](images/darkmoderotate2.png)
