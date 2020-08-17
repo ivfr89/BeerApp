@@ -1,6 +1,6 @@
 ![BeerApp](images/ic_launcher_round.png)
 
-# Introducción
+# BeerApp
 
 BeerApp, aplicación de cervezas utilizando arquitectura Clean, usando como patrón de presentación MVVM a través de un único estado.
 
