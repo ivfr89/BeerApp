@@ -23,6 +23,7 @@
 
             <ImageView
                 android:id="@+id/background"
+                android:contentDescription="@string/backgroundImageColor"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:scaleType="center"
@@ -44,6 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/defaultViewHeight"
                 android:text="@string/set_not_available"
+                android:textColor="?attr/colorOnPrimarySurface"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -56,7 +58,8 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="800dp"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -124,6 +127,7 @@
 
                         <ImageView
                             android:id="@+id/imgBeer"
+                            android:contentDescription="@string/beer"
                             android:layout_marginTop="@dimen/defaultMargin"
                             android:layout_width="@dimen/defaultImage"
                             android:layout_height="@dimen/defaultImage"
@@ -187,6 +191,7 @@
                             style="@android:style/TextAppearance.Material.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/defaultMargin"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

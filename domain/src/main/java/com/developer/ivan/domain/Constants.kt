@@ -5,7 +5,6 @@ object Constants{
     object Server{
         const val BASE_URL = "https://api.punkapi.com/v2/"
 
-        const val DEFAULT_PAGE=1
         const val DEFAULT_SIZE=20
 
         object Beer {

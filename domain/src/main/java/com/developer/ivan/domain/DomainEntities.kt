@@ -9,11 +9,12 @@ data class Beer(
     val abv: Double?,
     val ibu: Float?,
     val food_pairing: List<String>,
-    val isAvailable: Boolean)
+    val isAvailable: Boolean
+)
 
-sealed class Failure{
+sealed class Failure {
 
     abstract class CustomFailure : Failure()
     object NullResult : CustomFailure()
 }
-object NoParams
+

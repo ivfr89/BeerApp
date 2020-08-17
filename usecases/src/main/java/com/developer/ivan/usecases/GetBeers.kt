@@ -10,6 +10,6 @@ class GetBeers(private val beerRepository: BeerRepository) :
     override suspend fun execute(params: Params): Flow<Either<Failure, List<Beer>>> =
         beerRepository.getBeers(params.force)
 
-    class Params(val force: Boolean = true)
+    class Params(val force: Boolean = false)
 
 }

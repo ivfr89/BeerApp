@@ -1,6 +1,5 @@
 package com.developer.ivan.beerapp.ui.adapters
 
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -9,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.ivan.beerapp.R
 import com.developer.ivan.beerapp.databinding.ItemBeerBinding
-import com.developer.ivan.beerapp.ui.main.UIBeer
+import com.developer.ivan.beerapp.ui.main.models.UIBeer
 
 
 class BeerListAdapter(val onPressItem: (UIBeer, TextView) -> Unit) :
@@ -47,10 +46,10 @@ class BeerListAdapter(val onPressItem: (UIBeer, TextView) -> Unit) :
             txtTagLine.text = item.tagline
 
             cardItem.setCardBackgroundColor(
-                if (item.isAvailable)
-                    itemView.context.getColor(R.color.greenLight)
+                if (!item.isAvailable)
+                    itemView.context.getColor(R.color.beerNotAvailable)
                 else
-                    itemView.context.getColor(R.color.grayLight)
+                    itemView.context.getColor(R.color.beerAvailable)
             )
 
             itemView.setOnClickListener {

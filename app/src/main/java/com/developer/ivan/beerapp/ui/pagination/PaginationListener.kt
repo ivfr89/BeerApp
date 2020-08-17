@@ -1,4 +1,4 @@
-package com.developer.ivan.beerapp.ui.main.pagination
+package com.developer.ivan.beerapp.ui.pagination
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView

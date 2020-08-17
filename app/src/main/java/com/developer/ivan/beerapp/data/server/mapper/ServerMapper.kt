@@ -6,14 +6,6 @@ import com.developer.ivan.domain.*
 
 class ServerMapper {
 
-    fun convertEntitiesBeersToDomain(entityArticles: List<EntityBeer>): Either<Failure, List<Beer>> =
-        Either.Right(entityArticles.mapNotNull { entity ->
-            when (val result = convertEntityBeerToDomain(entity)) {
-                is Either.Right -> result.b
-                else -> null
-            }
-        })
-
     fun convertEntityBeerToDomain(entityArticle: EntityBeer): Either<Failure, Beer> =
         Either.Right(with(entityArticle) {
             Beer(

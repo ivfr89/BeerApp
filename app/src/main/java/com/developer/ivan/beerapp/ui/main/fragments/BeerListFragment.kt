@@ -19,9 +19,9 @@ import com.developer.ivan.beerapp.core.application
 import com.developer.ivan.beerapp.databinding.FragmentBeerListBinding
 import com.developer.ivan.beerapp.ui.adapters.BeerListAdapter
 import com.developer.ivan.beerapp.ui.main.fragments.BeerListViewModel.NavigationEvent
-import com.developer.ivan.beerapp.ui.main.UIBeer
+import com.developer.ivan.beerapp.ui.main.models.UIBeer
 import com.developer.ivan.beerapp.ui.main.di.BeerListSubComponent
-import com.developer.ivan.beerapp.ui.main.pagination.BeerPaginationListener
+import com.developer.ivan.beerapp.ui.pagination.BeerPaginationListener
 import javax.inject.Inject
 
 class BeerListFragment : Fragment() {
@@ -32,7 +32,7 @@ class BeerListFragment : Fragment() {
 
     private lateinit var mSubcomponent: BeerListSubComponent
 
-    var state: Parcelable? = null
+    private var state: Parcelable? = null
 
     private lateinit var binding: FragmentBeerListBinding
     private lateinit var mBeerAdapter: BeerListAdapter
@@ -89,7 +89,7 @@ class BeerListFragment : Fragment() {
 
             when (state) {
                 is BeerListViewModel.BeerListState.Error -> Log.e("Error", state.toString())
-                is BeerListViewModel.BeerListState.ShowItems -> mBeerAdapter.submitList(state.documentList)
+                is BeerListViewModel.BeerListState.ShowItems -> mBeerAdapter.submitList(state.beerList)
                 is BeerListViewModel.BeerListState.IsLoading -> with(binding) {
                     progressBar.isVisible = state.isLoading
                     mBeerPagination.isLoading = state.isLoading

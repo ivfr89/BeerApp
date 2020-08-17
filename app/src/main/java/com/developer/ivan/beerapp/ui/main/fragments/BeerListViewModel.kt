@@ -8,10 +8,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.developer.ivan.beerapp.core.Event
 import com.developer.ivan.beerapp.di.PerFragment
-import com.developer.ivan.beerapp.ui.main.UIBeer
+import com.developer.ivan.beerapp.ui.main.models.UIBeer
 import com.developer.ivan.beerapp.ui.mapper.UIMapper
 import com.developer.ivan.domain.Failure
 import com.developer.ivan.usecases.GetBeers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,12 +22,13 @@ import javax.inject.Inject
 class BeerListViewModel @Inject constructor(
     private val getBeers: GetBeers,
     private val uiMapper: UIMapper,
-    var state: Parcelable?
+    var state: Parcelable?,
+    private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     sealed class BeerListState {
         class Error(val failure: Failure) : BeerListState()
-        class ShowItems(val documentList: List<UIBeer>) : BeerListState()
+        class ShowItems(val beerList: List<UIBeer>) : BeerListState()
         class IsLastPage(val isLastPage: Boolean) : BeerListState()
         class IsLoading(val isLoading: Boolean) : BeerListState()
     }
@@ -49,43 +51,28 @@ class BeerListViewModel @Inject constructor(
 
 
     fun navigateTo(navEvent: NavigationEvent) {
-
         _navigation.value = Event(navEvent)
-
     }
 
     fun getBeers(force: Boolean = false) {
 
-        _beersStateListData.value =
-            BeerListState.IsLoading(
-                true
-            )
+        _beersStateListData.value = BeerListState.IsLoading(true)
 
-        viewModelScope.launch {
-            getBeers(
-                GetBeers.Params(
-                    force
-                )
-            ).collect { value ->
-                _beersStateListData.value =
-                    BeerListState.IsLoading(
-                        false
-                    )
-
-                value.fold(::handleFailure) { listBeers ->
+        viewModelScope.launch(dispatcher) {
+            getBeers(GetBeers.Params(force))
+                .collect { value ->
                     _beersStateListData.value =
-                        BeerListState.IsLastPage(
-                            listBeers.isEmpty()
-                        )
+                        BeerListState.IsLoading(false)
 
-                    also {
+                    value.fold(::handleFailure) { listBeers ->
                         _beersStateListData.value =
-                            BeerListState.ShowItems(
-                                uiMapper.convertBeersToUIBeers(listBeers)
-                            )
+                            BeerListState.IsLastPage(listBeers.isEmpty())
+                        also {
+                            _beersStateListData.value =
+                                BeerListState.ShowItems(uiMapper.convertBeersToUIBeers(listBeers))
+                        }
                     }
                 }
-            }
         }
 
     }

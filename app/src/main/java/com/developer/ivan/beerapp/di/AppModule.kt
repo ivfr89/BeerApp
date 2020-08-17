@@ -20,6 +20,8 @@ import com.developer.ivan.domain.Constants
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -33,7 +35,11 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideHttpClient() = OkHttpClient.Builder()
+    fun provideDispatcher() : CoroutineDispatcher = Dispatchers.Main
+
+    @Singleton
+    @Provides
+    fun provideHttpClient(): OkHttpClient = OkHttpClient.Builder()
         .callTimeout(Constants.Server.OkHTTPConfig.timeOut, TimeUnit.MILLISECONDS)
         .connectTimeout(Constants.Server.OkHTTPConfig.timeOut, TimeUnit.MILLISECONDS)
         .build()
@@ -49,7 +55,7 @@ class AppModule {
     fun provideRetrofitClient(
         okHttpClient: OkHttpClient,
         @Named("base_url") baseUrl: String
-    ) = Retrofit.Builder().client(okHttpClient)
+    ): ApiService = Retrofit.Builder().client(okHttpClient)
         .addConverterFactory(ScalarsConverterFactory.create())
         .baseUrl(baseUrl)
         .build().create(ApiService::class.java)

@@ -1,15 +1,10 @@
 package com.developer.ivan.beerapp.ui.mapper
 
-import com.developer.ivan.beerapp.ui.main.UIBeer
+import com.developer.ivan.beerapp.ui.main.models.UIBeer
 import com.developer.ivan.domain.Beer
 
 
 class UIMapper {
-
-    fun convertUIBeersToDomain(dbBeers: List<UIBeer>): List<Beer> =
-        dbBeers.map { entity ->
-            convertUIBeerToDomain(entity)
-        }
 
     fun convertUIBeerToDomain(uiBeer: UIBeer): Beer {
 

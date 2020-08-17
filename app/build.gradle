@@ -55,6 +55,7 @@ dependencies {
     implementation project(':data')
     implementation project(':domain')
     implementation project(':usecases')
+    implementation project(':testShared')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     def kotlinGradle = rootProject.ext.kotlin
@@ -70,7 +71,7 @@ dependencies {
     implementation navigationGradle.values()
     kapt kaptCompilerGradle.values()
     testImplementation testGradle.values()
-    androidTestImplementation androidTestGradle.values()
+    testImplementation androidTestGradle.values()
 
 
 

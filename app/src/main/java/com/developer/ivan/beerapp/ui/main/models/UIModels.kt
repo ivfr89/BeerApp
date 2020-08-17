@@ -1,4 +1,4 @@
-package com.developer.ivan.beerapp.ui.main
+package com.developer.ivan.beerapp.ui.main.models
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

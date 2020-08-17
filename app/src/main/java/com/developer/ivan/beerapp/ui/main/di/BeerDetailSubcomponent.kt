@@ -2,7 +2,6 @@ package com.developer.ivan.beerapp.ui.main.di
 
 import com.developer.ivan.beerapp.di.PerFragment
 import com.developer.ivan.beerapp.ui.main.fragments.BeerDetailFragment
-import com.developer.ivan.beerapp.ui.main.fragments.BeerListFragment
 import dagger.Subcomponent
 
 @PerFragment

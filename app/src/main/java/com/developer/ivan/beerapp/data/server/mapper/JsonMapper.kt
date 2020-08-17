@@ -5,7 +5,6 @@ import com.developer.ivan.domain.Beer
 import com.developer.ivan.domain.Either
 import com.developer.ivan.domain.Failure
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -20,11 +19,7 @@ class JsonMapper(private val moshi: Moshi) {
         return body(JSONArray(json))
     }
 
-/*    inline fun <T> getObject(json: String, body: JsonMapper.(JSONObject)->T): T{
-        return body(JSONObject(json).getJSONObject("data"))
-    }*/
-
-    fun convertJsonToEntityBeer(json: String): Either<Failure, EntityBeer> {
+    private fun convertJsonToEntityBeer(json: String): Either<Failure, EntityBeer> {
         return try {
             val data =
                 moshi.adapter(EntityBeer::class.java).fromJson(json)
@@ -40,7 +35,7 @@ class JsonMapper(private val moshi: Moshi) {
         }
     }
 
-    fun convertJsonToBeer(
+    private fun convertJsonToBeer(
         json: JSONObject,
         transform: (EntityBeer) -> Either<Failure, Beer>
     ): Either<Failure, Beer> {

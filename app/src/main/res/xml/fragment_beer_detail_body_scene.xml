@@ -49,7 +49,6 @@
             android:layout_height="match_parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/constraintBody"
             android:layout_marginTop="@dimen/defaultMargin" />
 
 

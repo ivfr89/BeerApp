@@ -18,7 +18,7 @@ import com.developer.ivan.beerapp.core.formatDecimals
 import com.developer.ivan.beerapp.core.loadImageOrHide
 import com.developer.ivan.beerapp.core.setNotNullText
 import com.developer.ivan.beerapp.databinding.FragmentBeerDetailBinding
-import com.developer.ivan.beerapp.ui.main.UIBeer
+import com.developer.ivan.beerapp.ui.main.models.UIBeer
 import com.developer.ivan.beerapp.ui.main.di.BeerDetailSubComponent
 import com.google.android.material.appbar.AppBarLayout
 import javax.inject.Inject
@@ -30,7 +30,7 @@ class BeerDetailFragment : Fragment() {
     @Inject
     lateinit var mViewModel: BeerDetailViewModel
 
-    lateinit var mSubcomponent: BeerDetailSubComponent
+    private lateinit var mSubcomponent: BeerDetailSubComponent
 
     private val args: BeerDetailFragmentArgs by navArgs()
 

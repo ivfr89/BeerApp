@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.developer.ivan.beerapp.di.PerFragment
-import com.developer.ivan.beerapp.ui.main.UIBeer
+import com.developer.ivan.beerapp.ui.main.models.UIBeer
 import com.developer.ivan.beerapp.ui.mapper.UIMapper
 import com.developer.ivan.domain.Failure
 import com.developer.ivan.usecases.GetBeerById
@@ -23,7 +23,7 @@ class BeerDetailViewModel @Inject constructor(
     private val uiMapper: UIMapper
 ) : ViewModel() {
 
-    lateinit var uiBeer: UIBeer
+    private lateinit var uiBeer: UIBeer
 
     sealed class BeerListState {
         class Error(val failure: Failure) : BeerListState()

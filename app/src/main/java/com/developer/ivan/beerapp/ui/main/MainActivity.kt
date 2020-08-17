@@ -19,11 +19,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         return (nav.navigateUp()
                 || super.onSupportNavigateUp())

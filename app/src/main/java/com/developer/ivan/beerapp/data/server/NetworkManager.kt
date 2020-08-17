@@ -13,7 +13,7 @@ interface NetworkManager {
         Failure.CustomFailure()
 
     class UnexpectedServerError(val errorCode: Int, val message: String?) : Failure.CustomFailure()
-    class EmptyBody() : Failure.CustomFailure()
+    class EmptyBody : Failure.CustomFailure()
 
 
     suspend fun <T, R> safeRequest(

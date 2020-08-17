@@ -3,10 +3,9 @@ package com.developer.ivan.data.repositories
 import com.developer.ivan.data.datasources.LocalDataSource
 import com.developer.ivan.data.datasources.RemoteDataSource
 import com.developer.ivan.domain.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flatMapLatest
 
 interface BeerRepository {
 
