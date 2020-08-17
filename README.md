@@ -1,4 +1,4 @@
-![BeerApp](images/ic_launcher.round.png)
+![BeerApp](images/ic_launcher_round.png)
 
 # Introducción
 
@@ -121,9 +121,7 @@ Las respuestas llevan un Either como devolución en las llamadas: Ejemplo
 Either es un monad, unión disjuntiva, devuelve siempre un valor, o bien la clase izquierda (en cuyo caso será un fallo) o bien la derecha (entonces será el dato que buscas). 
 Esto es así ya que de esta forma se controla cada uno de los fallos posibles a la hora de devolver la petición; la estructura permite un modelo abierto de códigos de error de petición o extender de la clase abstracta CustomFailure para decidir qué casos de uso tienen que errores.
 
-Luego cada capa tiene un modelo diferente: Beer tiene: un modelo de UI , un modelo del servidor entity, sin por ejemplo el campo de disponibilidad, un modelo de dominio y otro de base de datos
-
-Cada capa tiene su conversor que permite gestionar conversiones de un lado a otro, de forma que los cambios que pueda haber en backend no afecten al resto de la aplicación, y viceversa.
+Cada capa tiene un modelo diferente: Beer tiene: un modelo de UI , un modelo del servidor entity, sin por ejemplo el campo de disponibilidad, un modelo de dominio y otro de base de datos. Para hacer esta transformación, las capas tiene un conversor que permite gestionar conversiones de un lado a otro, de forma que los cambios que pueda haber en backend no afecten al resto de la aplicación, y viceversa.
 
 
 
@@ -131,23 +129,23 @@ Cada capa tiene su conversor que permite gestionar conversiones de un lado a otr
 
 Se ha realizado Unit testing del repositorio, casos de uso y un par de test del BeerListViewModel
 
-![test1]("images/test1.png")
-![test1]("images/test2.png")
-![test1]("images/test3.png")
+![Test ViewModel](images/test1.png)
+![Test Repository](images/test2.png)
+![Test UseCases](images/test3.png)
 
 
 # Algunas características
 
 ##Lista y detalle con animaciones
-![lista y detalle]("images/image1.png")
-![lista y detalle]("images/image2.png")
-![lista y detalle]("images/image3.png")
-![lista y detalle]("images/image4.png")
+![lista y detalle 1](images/image1.png)
+![lista y detalle 2](images/image2.png)
+![lista y detalle 3](images/image3.png)
+![lista y detalle 4](images/image4.png)
 
 ##Modo oscuro
-[oscuro]("images/darkmode1.png")
-[oscuro]("images/darkmode2.png")
+[Modo oscuro lista](images/darkmode1.png)
+[Modo oscuro detalle](images/darkmode2.png)
 
 ##Rotación en cualquier punto
-[rotacion]("images/darkmoderotate1.png")
-[rotacion]("images/darkmoderotate2.png")
+[Rotación 1](images/darkmoderotate1.png)
+[Rotación 2](images/darkmoderotate2.png)
