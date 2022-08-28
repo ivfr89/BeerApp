@@ -4,12 +4,11 @@ import android.os.Parcelable
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.developer.ivan.beerapp.ui.main.models.UIBeer
+import com.developer.ivan.beerapp.ui.main.models.BeerUi
 import com.developer.ivan.beerapp.ui.mapper.UIMapper
 import com.developer.ivan.beerapp.utils.CoroutinesMainDispatcherRule
 import com.developer.ivan.domain.Either
-import com.developer.ivan.usecases.GetBeers
-import com.developer.testshared.beerList
+import com.developer.ivan.interactors.GetBeers
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.refEq
 import com.nhaarman.mockitokotlin2.verify
@@ -80,7 +79,7 @@ class BeerListViewModelTest {
             mViewModel.beersStateListData.observeForever(observer)
 
             val expected = listOf(
-                UIBeer(
+                BeerUi(
                     1,
                     "First beer",
                     "mytag",
@@ -92,7 +91,7 @@ class BeerListViewModelTest {
                     true
                 )
                 ,
-                UIBeer(
+                BeerUi(
                     2,
                     "Second beer",
                     "mytag",
