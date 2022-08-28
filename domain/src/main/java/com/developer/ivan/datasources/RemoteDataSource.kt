@@ -1,4 +1,4 @@
-package com.developer.ivan.data.datasources
+package com.developer.ivan.datasources
 
 import com.developer.ivan.domain.Beer
 import com.developer.ivan.domain.Either

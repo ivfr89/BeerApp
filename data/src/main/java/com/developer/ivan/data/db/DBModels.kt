@@ -1,15 +1,17 @@
-package com.developer.ivan.beerapp.data.db
+package com.developer.ivan.data.db
 
 import androidx.room.Entity
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
 
 class Converters {
 
-    private val moshi = Moshi.Builder().build()
+    private val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory()).build()
 
     @TypeConverter
     fun fromString(value: String): List<String> {
@@ -31,16 +33,17 @@ class Converters {
     }
 }
 
+
 @Entity(primaryKeys = ["id"])
 @TypeConverters(value = [Converters::class])
-data class DBBeer(
+data class BeerDb(
     val id: Int,
     val name: String,
     val tagline: String?,
     val description: String?,
-    val image_url: String?,
-    val abv: Double?,
+    val imageUrl: String?,
+    val alcoholByVolume: Double?,
     val ibu: Float?,
-    val food_pairing: List<String>,
+    val foodPairing: List<String>,
     val isAvailable: Boolean
 )

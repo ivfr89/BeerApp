@@ -1,8 +1,9 @@
-package com.developer.ivan.beerapp.data.server
+package com.developer.ivan.data.server
 
 import com.developer.ivan.domain.Constants
 import retrofit2.Response
 import retrofit2.http.Query
+
 
 interface ApiService {
 
@@ -11,6 +12,4 @@ interface ApiService {
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
     ): Response<String>
-
-
 }

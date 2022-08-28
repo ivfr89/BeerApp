@@ -1,12 +1,11 @@
-package com.developer.ivan.beerapp.data.server
+package com.developer.ivan.data.server
 
 import com.developer.ivan.domain.Either
 import com.developer.ivan.domain.Failure
-import com.developer.ivan.domain.flatMapToRight
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import com.developer.ivan.domain.flatMap
+import retrofit2.Call
 import retrofit2.Response
 
-@Suppress("BlockingMethodInNonBlockingContext")
 interface NetworkManager {
 
     class ServerResponseException(val errorCode: Int, val message: String?) :
@@ -18,21 +17,18 @@ interface NetworkManager {
 
     suspend fun <T, R> safeRequest(
         callRequest: Response<T>,
-        functionCall: (Either.Right<T>) -> Either<Failure, R>
+        functionCall: (T) -> Either<Failure, R>
     ): Either<Failure, R>
 
-
-    @ExperimentalCoroutinesApi
     class NetworkImplementation : NetworkManager {
 
         override suspend fun <T, R> safeRequest(
-            callRequest: Response<T>,
-            functionCall: (Either.Right<T>) -> Either<Failure, R>
+            response: Response<T>,
+            functionCall: (T) -> Either<Failure, R>
         ): Either<Failure, R> {
 
-
-            return ((if (callRequest.isSuccessful) {
-                val body = callRequest.body()
+            return ((if (response.isSuccessful) {
+                val body = response.body()
 
                 if (body != null)
                     Either.Right(body)
@@ -40,25 +36,21 @@ interface NetworkManager {
                     Either.Left(EmptyBody())
 
             } else {
-                when (callRequest.code()) {
+                when (response.code()) {
                     in 300..600 -> Either.Left(
                         ServerResponseException(
-                            callRequest.code(),
-                            callRequest.errorBody()?.string()
+                            response.code(),
+                            response.errorBody()?.string()
                         )
                     )
                     else -> Either.Left(
                         UnexpectedServerError(
-                            callRequest.code(),
-                            callRequest.errorBody()?.string()
+                            response.code(),
+                            response.errorBody()?.string()
                         )
                     )
                 }
-            }).flatMapToRight { rightResult -> functionCall.invoke(Either.Right(rightResult)) })
-
+            }).flatMap { rightResult -> functionCall.invoke(rightResult) })
         }
-
     }
-
-
 }

@@ -1,6 +1,5 @@
-package com.developer.ivan.beerapp.data.server.mapper
-
-import com.developer.ivan.beerapp.data.server.entities.EntityBeer
+package com.developer.ivan.data.server
+import com.developer.ivan.data.server.entities.BeerApiModel
 import com.developer.ivan.domain.Beer
 import com.developer.ivan.domain.Either
 import com.developer.ivan.domain.Failure
@@ -8,7 +7,6 @@ import com.squareup.moshi.Moshi
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-
 
 class JsonMapper(private val moshi: Moshi) {
 
@@ -19,10 +17,10 @@ class JsonMapper(private val moshi: Moshi) {
         return body(JSONArray(json))
     }
 
-    private fun convertJsonToEntityBeer(json: String): Either<Failure, EntityBeer> {
+    private fun convertJsonToEntityBeer(json: String): Either<Failure, BeerApiModel> {
         return try {
             val data =
-                moshi.adapter(EntityBeer::class.java).fromJson(json)
+                moshi.adapter(BeerApiModel::class.java).fromJson(json)
 
             data?.let {
                 Either.Right(it)
@@ -37,7 +35,7 @@ class JsonMapper(private val moshi: Moshi) {
 
     private fun convertJsonToBeer(
         json: JSONObject,
-        transform: (EntityBeer) -> Either<Failure, Beer>
+        transform: (BeerApiModel) -> Either<Failure, Beer>
     ): Either<Failure, Beer> {
         return when (val result = convertJsonToEntityBeer(json.toString())) {
             is Either.Left -> result
@@ -47,7 +45,7 @@ class JsonMapper(private val moshi: Moshi) {
 
     fun convertJsonToBeers(
         json: JSONArray,
-        transform: (EntityBeer) -> Either<Failure, Beer>
+        transform: (BeerApiModel) -> Either<Failure, Beer>
     ): Either<Failure, List<Beer>> {
 
         val list = mutableListOf<Beer>()
@@ -72,9 +70,6 @@ class JsonMapper(private val moshi: Moshi) {
         }catch (e: JSONException){
             result = Either.Left(JsonSyntaxException)
         }
-
-
-
         return result
     }
 
