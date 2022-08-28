@@ -37,7 +37,7 @@ import com.valentinilk.shimmer.ShimmerBounds
 import com.valentinilk.shimmer.rememberShimmer
 import com.valentinilk.shimmer.shimmer
 
-private val DEFAULT_ALPHA_DURATION = 500
+private const val DEFAULT_ALPHA_DURATION = 0
 
 @Composable
 fun BeerListScreen(
@@ -110,7 +110,7 @@ fun HandleObserverStates(
                         .height(80.dp),
                     title = it.name,
                     subtitle = it.tagline.orEmpty(),
-                    url = it.image_url.orEmpty(),
+                    url = it.imageUrl.orEmpty(),
                     color = it.takeIf { it.isAvailable }?.let { MaterialTheme.colors.surface }
                         ?: run { Red_60 },
                     onClick = { onNavigateToBeerDetail(it.id.toInt()) }
@@ -187,7 +187,7 @@ fun SmallCard(
 fun SmallCardSkeleton(
     modifier: Modifier = Modifier
 ) {
-    val colorSkeleton = MaterialTheme.colors.onPrimary.copy(alpha = 0.3f)
+    val colorSkeleton = MaterialTheme.colors.surface
     val shimmerInstance =
         rememberShimmer(
             shimmerBounds = ShimmerBounds.Window,

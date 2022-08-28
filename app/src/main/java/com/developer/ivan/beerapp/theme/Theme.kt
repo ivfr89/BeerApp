@@ -6,6 +6,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -15,17 +16,18 @@ private const val SHIMMER_DURATION_MILLIS = 1000
 private const val SHIMMER_DELAY_MILLIS = 500
 
 private val DarkColorScheme = darkColors(
-    primary = Blue80,
-    secondary = PurpleGrey80,
-    primaryVariant = Green_70,
-    surface = Gray_80
+    primary = Black_70,
+    secondary = White_100,
+    primaryVariant = Black_80,
+    surface = Gray_80,
+    background = Black_90
 )
-private val LightColorScheme = darkColors(
-    primary = White_10,
-    secondary = PurpleGrey80,
-    primaryVariant = Black_90,
-    surface = White_10,
-    background = White_100
+private val LightColorScheme = lightColors(
+    primary = Gray_50,
+    secondary = Black_70,
+    primaryVariant = White_10,
+    background = White_100,
+    surface = PurpleGrey10
 )
 
 @Composable
