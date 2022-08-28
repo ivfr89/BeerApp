@@ -1,77 +1,68 @@
 package com.developer.ivan.beerapp.ui.main.fragments
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.developer.ivan.beerapp.di.PerFragment
-import com.developer.ivan.beerapp.ui.main.models.UIBeer
-import com.developer.ivan.beerapp.ui.mapper.UIMapper
+import com.developer.ivan.beerapp.ui.main.BeerDetailState
+import com.developer.ivan.beerapp.ui.main.models.BeerUi
+import com.developer.ivan.beerapp.ui.mapper.toDomain
+import com.developer.ivan.beerapp.ui.mapper.toUi
+import com.developer.ivan.beerapp.ui.utils.CoroutineManageContext
+import com.developer.ivan.beerapp.ui.utils.CoroutineUtils
 import com.developer.ivan.domain.Failure
-import com.developer.ivan.usecases.GetBeerById
-import com.developer.ivan.usecases.UpdateBeer
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onStart
+import com.developer.ivan.interactors.GetBeerById
+import com.developer.ivan.interactors.UpdateBeer
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @Suppress("RedundantSuspendModifier")
-@PerFragment
+@HiltViewModel
 class BeerDetailViewModel @Inject constructor(
     private val getBeer: GetBeerById,
     private val updateBeer: UpdateBeer,
-    private val uiMapper: UIMapper
-) : ViewModel() {
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+) : ViewModel(), CoroutineUtils by CoroutineManageContext(dispatcher) {
 
-    private lateinit var uiBeer: UIBeer
+    private lateinit var beerUi: BeerUi
 
-    sealed class BeerListState {
-        class Error(val failure: Failure) : BeerListState()
-        class ShowItem(val item: UIBeer) : BeerListState()
-        class IsLoading(val isLoading: Boolean) : BeerListState()
-    }
 
-    private var _beersStateData = MutableLiveData<BeerListState>()
+    private var localState = MutableStateFlow<BeerDetailState>(BeerDetailState.Idle)
 
-    val beersStateData: LiveData<BeerListState>
-        get() = _beersStateData
+    val state: StateFlow<BeerDetailState>
+        get() = localState
 
     fun getBeer(id: Int) {
 
         viewModelScope.launch {
-            getBeer(GetBeerById.Params(id))
-                .onStart { _beersStateData.value = BeerListState.IsLoading(true) }
-                .collect { value ->
-                    _beersStateData.value = BeerListState.IsLoading(false)
+            BeerDetailState.IsLoading.postOn(localState)
 
-                    value.fold(::handleFailure) { beer ->
-                        also {
-                            uiBeer = uiMapper.convertBeerToUIBeer(beer)
-                            _beersStateData.value = BeerListState.ShowItem(uiBeer)
-                        }
-                    }
+            getBeer(GetBeerById.Params(id))
+                .map { value ->
+                    beerUi = value.toUi()
+                    BeerDetailState.ShowItem(beerUi).postOn(localState)
+                }.mapLeft {
+                    handleFailure(it)
                 }
         }
-
     }
 
     private suspend fun handleFailure(failure: Failure) {
-        _beersStateData.value = BeerListState.Error(failure)
+        localState.value = BeerDetailState.Error(failure)
     }
 
     fun switchAvailability() {
-
         viewModelScope.launch {
-            val updatedUIBeer = uiBeer.copy(isAvailable = !uiBeer.isAvailable)
-            updateBeer(UpdateBeer.Params(uiMapper.convertUIBeerToDomain(updatedUIBeer)))
-                .onStart { _beersStateData.value = BeerListState.IsLoading(true) }
-                .collect {
-                    _beersStateData.value = BeerListState.IsLoading(false)
+            beerUi = beerUi.copy(isAvailable = !beerUi.isAvailable)
+            BeerDetailState.IsLoading.postOn(localState)
+
+            updateBeer(UpdateBeer.Params(beerUi.toDomain()))
+                .map {
+                    BeerDetailState.ShowItem(beerUi).postOn(localState)
                 }
         }
-
-
-
     }
-
 }
