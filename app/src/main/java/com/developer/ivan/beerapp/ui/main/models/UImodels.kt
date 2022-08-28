@@ -10,7 +10,7 @@ data class BeerUi(
     val name: String,
     val tagline: String?,
     val description: String?,
-    val image_url: String?,
+    val imageUrl: String?,
     val alcoholByVolume: Double?,
     val ibu: Float?,
     val foodPairing: List<String>,
