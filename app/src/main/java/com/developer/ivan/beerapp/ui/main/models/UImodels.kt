@@ -1,17 +1,18 @@
 package com.developer.ivan.beerapp.ui.main.models
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import com.developer.ivan.beerapp.ui.utils.UniqueItem
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class UIBeer(
-    val id: Int,
+data class BeerUi(
+    override val id: String,
     val name: String,
     val tagline: String?,
     val description: String?,
     val image_url: String?,
-    val abv: Double?,
+    val alcoholByVolume: Double?,
     val ibu: Float?,
-    val food_pairing: List<String>,
+    val foodPairing: List<String>,
     val isAvailable: Boolean
-) : Parcelable
+) : Parcelable, UniqueItem
