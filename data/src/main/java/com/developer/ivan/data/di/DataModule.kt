@@ -5,11 +5,12 @@ import android.content.Context
 import com.developer.ivan.ConnectionManager
 import com.developer.ivan.data.db.DB
 import com.developer.ivan.data.db.datasources.RoomDataSource
-import com.developer.ivan.data.repositories.BeerRepositoryImplementation
+import com.developer.ivan.data.repositories.BeerDataRepository
+import com.developer.ivan.data.server.ApiClientBuilder
 import com.developer.ivan.data.server.ApiService
 import com.developer.ivan.data.server.JsonMapper
 import com.developer.ivan.data.server.LocalConnectivityManager
-import com.developer.ivan.data.server.datasources.RetrofitDataSource
+import com.developer.ivan.data.server.datasources.BeerApiClient
 import com.developer.ivan.datasources.LocalDataSource
 import com.developer.ivan.datasources.RemoteDataSource
 import com.developer.ivan.domain.Constants
@@ -50,15 +51,10 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideRetrofitClient(
+    fun provideApiClientBuilder(
         okHttpClient: OkHttpClient,
-        jsonConfiguration: Json,
         @Named("base_url") baseUrl: String
-    ): ApiService = Retrofit.Builder().client(okHttpClient)
-        .addConverterFactory(ScalarsConverterFactory.create())
-        .addConverterFactory(jsonConfiguration.asConverterFactory(MediaType.parse("application/json")!!))
-        .baseUrl(baseUrl)
-        .build().create(ApiService::class.java)
+    ): ApiClientBuilder = ApiClientBuilder(baseUrl, okHttpClient)
 
     @Singleton
     @Provides
@@ -80,7 +76,7 @@ class DataModule {
     fun provideBeerRepository(
         localDataSource: LocalDataSource,
         remoteDataSource: RemoteDataSource
-    ): BeerRepository = BeerRepositoryImplementation(localDataSource, remoteDataSource)
+    ): BeerRepository = BeerDataRepository(localDataSource, remoteDataSource)
 
     @Singleton
     @Provides
@@ -91,11 +87,11 @@ class DataModule {
     @Singleton
     @Provides
     fun provideRemoteDataSource(
-        apiService: ApiService,
+        apiClientBuilder: ApiClientBuilder,
         jsonMapper: JsonMapper,
         connectionManager: ConnectionManager
-    ): RemoteDataSource = RetrofitDataSource(
-        apiService,
+    ): RemoteDataSource = BeerApiClient(
+        apiClientBuilder.buildEndpoint(ApiService::class),
         jsonMapper,
         connectionManager
     )
