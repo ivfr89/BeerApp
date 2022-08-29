@@ -11,7 +11,7 @@ import com.developer.ivan.domain.Either
 import com.developer.ivan.domain.Failure
 import com.developer.ivan.domain.toRight
 
-class RetrofitDataSource(
+class BeerApiClient(
     private val retrofit: ApiService,
     private val jsonMapper: JsonMapper,
     private val connectivityManager: ConnectionManager

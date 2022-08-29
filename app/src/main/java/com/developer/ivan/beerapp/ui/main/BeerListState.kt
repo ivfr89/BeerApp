@@ -9,8 +9,8 @@ private const val NUMBER_ITEMS_LOADING = 10
 sealed class BeerListState {
         object Idle : BeerListState()
         data class Error(val failure: Failure) : BeerListState()
-        data class ShowItems(val beerList: List<BeerUi>) : BeerListState()
-        object IsLoading : BeerListState()
+        data class WithItems(val beerList: List<BeerUi>) : BeerListState()
+        object Loading : BeerListState()
         data class Paging(val beerList: List<BeerUi>) : BeerListState()
     }
 
@@ -19,6 +19,6 @@ internal fun mapLazyType(state: BeerListState) =
         is BeerListState.Error,
         BeerListState.Idle -> LazyType.None
         is BeerListState.Paging -> LazyType.Paging(state.beerList)
-        BeerListState.IsLoading -> LazyType.Loading(NUMBER_ITEMS_LOADING)
-        is BeerListState.ShowItems -> LazyType.Render(state.beerList)
+        BeerListState.Loading -> LazyType.Loading(NUMBER_ITEMS_LOADING)
+        is BeerListState.WithItems -> LazyType.Render(state.beerList)
     }

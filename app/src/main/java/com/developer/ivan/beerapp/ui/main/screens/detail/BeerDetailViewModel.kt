@@ -1,8 +1,7 @@
-package com.developer.ivan.beerapp.ui.main.fragments
+package com.developer.ivan.beerapp.ui.main.screens.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.developer.ivan.beerapp.ui.main.BeerDetailState
 import com.developer.ivan.beerapp.ui.main.models.BeerUi
 import com.developer.ivan.beerapp.ui.mapper.toDomain
 import com.developer.ivan.beerapp.ui.mapper.toUi
@@ -37,8 +36,8 @@ class BeerDetailViewModel @Inject constructor(
 
     fun getBeer(id: Int) {
 
-        viewModelScope.launch {
-            BeerDetailState.IsLoading.postOn(localState)
+        viewModelScope.launch(dispatcher) {
+            BeerDetailState.Loading.postOn(localState)
 
             getBeer(GetBeerById.Params(id))
                 .map { value ->
@@ -55,9 +54,9 @@ class BeerDetailViewModel @Inject constructor(
     }
 
     fun switchAvailability() {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher) {
             beerUi = beerUi.copy(isAvailable = !beerUi.isAvailable)
-            BeerDetailState.IsLoading.postOn(localState)
+            BeerDetailState.Loading.postOn(localState)
 
             updateBeer(UpdateBeer.Params(beerUi.toDomain()))
                 .map {

@@ -1,11 +1,11 @@
 package com.developer.ivan.domain
 
-object Constants{
+object Constants {
 
-    object Server{
+    object Server {
         const val BASE_URL = "https://api.punkapi.com/v2/"
 
-        const val DEFAULT_SIZE=20
+        const val DEFAULT_SIZE = 20
 
         object Beer {
             const val GET_BEERS = "beers/"

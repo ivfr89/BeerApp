@@ -26,8 +26,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.developer.ivan.beerapp.R
 import com.developer.ivan.beerapp.theme.Green_50
 import com.developer.ivan.beerapp.theme.Red_60
-import com.developer.ivan.beerapp.ui.main.BeerDetailState
-import com.developer.ivan.beerapp.ui.main.fragments.BeerDetailViewModel
+import com.developer.ivan.beerapp.ui.main.screens.detail.BeerDetailState
+import com.developer.ivan.beerapp.ui.main.screens.detail.BeerDetailViewModel
 
 @Composable
 fun BeerDetailScreen(
@@ -50,7 +50,7 @@ fun HandleObserverStates(
     when (state) {
         is BeerDetailState.Error,
         BeerDetailState.Idle,
-        BeerDetailState.IsLoading -> Unit
+        BeerDetailState.Loading -> Unit
         is BeerDetailState.ShowItem -> {
             val item = (state as BeerDetailState.ShowItem).item
             Column(

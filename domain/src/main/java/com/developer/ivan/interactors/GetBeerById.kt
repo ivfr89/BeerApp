@@ -9,8 +9,6 @@ class GetBeerById(private val beerRepository: BeerRepository) :
 
     override suspend fun execute(params: Params): Either<Failure, Beer> =
         beerRepository.getBeer(params.id)
-
-
     class Params(val id: Int)
 
 }

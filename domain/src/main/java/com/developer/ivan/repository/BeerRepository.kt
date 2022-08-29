@@ -9,6 +9,7 @@ interface BeerRepository {
     suspend fun getBeerCount(): Either.Right<Int>
 
     suspend fun getBeers(
+        force: Boolean,
         page: Int,
         size: Int
     ): Either<Failure, List<Beer>>
