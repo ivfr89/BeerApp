@@ -72,6 +72,4 @@ class JsonMapper(private val moshi: Moshi) {
         }
         return result
     }
-
-
 }

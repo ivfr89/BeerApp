@@ -3,12 +3,18 @@ package com.developer.ivan.data.repositories
 import com.developer.ivan.data.models.BeerMother
 import com.developer.ivan.datasources.LocalDataSource
 import com.developer.ivan.datasources.RemoteDataSource
-import com.developer.ivan.domain.*
-import io.mockk.*
+import com.developer.ivan.domain.Beer
+import com.developer.ivan.domain.Failure
+import com.developer.ivan.domain.toLeft
+import com.developer.ivan.domain.toRight
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.coVerifyOrder
+import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
-class UserDataRepositoryTest {
+class BeerRepositoryTest {
 
     private val mother: BeerMother = BeerMother()
     private val remoteDataSource = mockk<RemoteDataSource>(relaxed = true)
@@ -86,7 +92,6 @@ class UserDataRepositoryTest {
     fun `getBeer obtain a null result if Beer doesn't exists`() {
         runBlocking {
             val expectedId = mother.givenAnyId()
-            val expectedBeer = mother.givenABeer(id = expectedId)
 
             coEvery { localDataSource.getLocalBeer(expectedId) } returns Failure.NullResult.toLeft()
 

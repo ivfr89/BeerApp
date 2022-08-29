@@ -1,6 +1,10 @@
 package com.developer.ivan.data.db
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface BeerDao{
@@ -19,6 +23,5 @@ interface BeerDao{
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
     fun updateBeer(beerDb: BeerDb)
-
 
 }

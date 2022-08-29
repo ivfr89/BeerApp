@@ -1,6 +1,7 @@
 package com.developer.ivan.interactors
 
-import com.developer.ivan.domain.*
+import com.developer.ivan.domain.Either
+import com.developer.ivan.domain.Failure
 import com.developer.ivan.repository.BeerRepository
 
 class GetBeerCount(private val beerRepository: BeerRepository) :

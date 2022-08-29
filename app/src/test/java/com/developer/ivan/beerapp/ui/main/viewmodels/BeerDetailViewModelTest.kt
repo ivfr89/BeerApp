@@ -10,7 +10,9 @@ import com.developer.ivan.domain.Beer
 import com.developer.ivan.domain.toRight
 import com.developer.ivan.interactors.GetBeerById
 import com.developer.ivan.interactors.UpdateBeer
-import io.mockk.*
+import io.mockk.coEvery
+import io.mockk.mockk
+import io.mockk.verify
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -93,5 +95,4 @@ class BeerDetailViewModelTest : ViewModelTest() {
         coEvery { updateBeerInteractor(UpdateBeer.Params(beer)) } returns
                 Unit.toRight()
     }
-
 }

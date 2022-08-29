@@ -1,6 +1,10 @@
 package com.developer.ivan.interactors
 
-import com.developer.ivan.domain.*
+import com.developer.ivan.domain.Beer
+import com.developer.ivan.domain.Constants
+import com.developer.ivan.domain.Either
+import com.developer.ivan.domain.Failure
+import com.developer.ivan.domain.flatMap
 import com.developer.ivan.repository.BeerRepository
 
 class GetBeers(

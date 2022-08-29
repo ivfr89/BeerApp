@@ -10,7 +10,9 @@ import com.developer.ivan.domain.Failure
 import com.developer.ivan.domain.toLeft
 import com.developer.ivan.domain.toRight
 import com.developer.ivan.interactors.GetBeers
-import io.mockk.*
+import io.mockk.coEvery
+import io.mockk.mockk
+import io.mockk.verify
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -104,5 +106,4 @@ class BeerListViewModelTest : ViewModelTest() {
                 Failure.ElementNotFound("No beers found")
                     .toLeft()
     }
-
 }

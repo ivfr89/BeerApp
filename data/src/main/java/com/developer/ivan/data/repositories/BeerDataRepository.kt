@@ -2,7 +2,11 @@ package com.developer.ivan.data.repositories
 
 import com.developer.ivan.datasources.LocalDataSource
 import com.developer.ivan.datasources.RemoteDataSource
-import com.developer.ivan.domain.*
+import com.developer.ivan.domain.Beer
+import com.developer.ivan.domain.Either
+import com.developer.ivan.domain.Failure
+import com.developer.ivan.domain.flatMap
+import com.developer.ivan.domain.toRight
 import com.developer.ivan.repository.BeerRepository
 
 class BeerDataRepository(
