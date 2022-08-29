@@ -6,6 +6,7 @@ plugins {
 dependencies {
     implementation(fileTree(mapOf(Pair("dir", "libs"), Pair("include", listOf("*.jar")))))
     implementCore()
+    testBase()
 }
 
 java {

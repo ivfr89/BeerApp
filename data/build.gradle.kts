@@ -19,13 +19,14 @@ dependencies {
     implementation(fileTree(mapOf(Pair("dir", "libs"), Pair("include", listOf("*.jar")))))
 
     implementation(project(":domain"))
-//    implementation(project(":testShared"))
 
     implementCore()
-    kaptCore()
     implementFramework()
     implementData()
+    kaptCore()
     kaptData()
+    testBase()
+    testData()
 
 }
 

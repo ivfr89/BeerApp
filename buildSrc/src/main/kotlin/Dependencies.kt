@@ -19,22 +19,29 @@ import Dependencies.Compose.uiText
 import Dependencies.Compose.uiUtil
 import Dependencies.Compose.viewBinding
 import Dependencies.Compose.viewModel
+import Dependencies.Core.assertj
 import Dependencies.Core.coroutines
 import Dependencies.Core.coroutinesCore
+import Dependencies.Core.coroutinesTest
+import Dependencies.Core.junit
+import Dependencies.Core.mockk
 import Dependencies.Core.moshi
 import Dependencies.Core.moshiCompiler
 import Dependencies.Core.serializationCore
 import Dependencies.Core.serializationJson
 import Dependencies.Data.moshiConverter
 import Dependencies.Data.retrofit
+import Dependencies.Data.retrofitMockWebServer
 import Dependencies.Data.retrofitSerializer
 import Dependencies.Data.room
 import Dependencies.Data.roomKapt
 import Dependencies.Data.roomKtx
 import Dependencies.Data.scalarsConverter
+import Dependencies.Framework.coreTesting
 import Dependencies.Framework.hilt
 import Dependencies.Framework.hiltKapt
 import Dependencies.Framework.lifecycle
+import Dependencies.Framework.livedata
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
 object Dependencies {
@@ -91,6 +98,8 @@ object Dependencies {
             "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
         internal const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
         internal const val hiltKapt = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+        internal const val coreTesting = "androidx.arch.core:core-testing:${Versions.coretesting}"
+        internal const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
 
         val implementation = listOf(
             lifecycle,
@@ -113,15 +122,19 @@ object Dependencies {
         internal const val coroutinesCore =
             "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
         internal const val coroutinesTest =
-            "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+            "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
         internal const val moshi =
             "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
         internal const val moshiCompiler =
             "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
+        internal const val junit =
+            "junit:junit:${Versions.junit}"
+        internal const val mockk =
+            "io.mockk:mockk:${Versions.mockk}"
+        internal const val assertj =
+            "org.assertj:assertj-core:${Versions.assertj}"
 
-        val test = listOf(
-            coroutinesTest
-        )
+
     }
 
     object Data {
@@ -137,6 +150,7 @@ object Dependencies {
         internal const val roomKapt = "androidx.room:room-compiler:${Versions.room}"
         internal const val ktorTest = "io.ktor:ktor-client-mock:${Versions.ktor}"
         internal const val roomAndroidTest = "androidx.room:room-testing:${Versions.room}"
+        internal const val retrofitMockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.mockwebserver}"
 
         val test = listOf(
             ktorTest
@@ -187,6 +201,7 @@ fun DependencyHandler.kaptCore() {
 fun DependencyHandler.implementFramework() {
     add("implementation", lifecycle)
     add("implementation", hilt)
+    add("implementation", livedata)
     add("kapt", hiltKapt)
 }
 
@@ -206,4 +221,17 @@ fun DependencyHandler.implementData() {
 
 fun DependencyHandler.kaptData() {
     add("kapt", roomKapt)
+}
+
+fun DependencyHandler.testBase() {
+    add("testImplementation", junit)
+    add("testImplementation", mockk)
+    add("testImplementation", assertj)
+    add("testImplementation", coroutinesCore)
+    add("testImplementation", coroutinesTest)
+    add("testImplementation", coreTesting)
+}
+
+fun DependencyHandler.testData() {
+    add("testImplementation", retrofitMockWebServer)
 }

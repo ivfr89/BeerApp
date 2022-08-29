@@ -58,6 +58,7 @@ dependencies {
     implementCore()
     implementFramework()
     implementCompose()
+    testBase()
 }
 
 // Allow references to generated code
