@@ -2,11 +2,11 @@ package com.developer.ivan.beerapp.ui.main.screens.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.developer.ivan.beerapp.androidbase.utils.CoroutineManageContext
+import com.developer.ivan.beerapp.androidbase.utils.CoroutineUtils
 import com.developer.ivan.beerapp.ui.main.models.BeerUi
 import com.developer.ivan.beerapp.ui.mapper.toDomain
 import com.developer.ivan.beerapp.ui.mapper.toUi
-import com.developer.ivan.beerapp.ui.utils.CoroutineManageContext
-import com.developer.ivan.beerapp.ui.utils.CoroutineUtils
 import com.developer.ivan.domain.Failure
 import com.developer.ivan.interactors.GetBeerById
 import com.developer.ivan.interactors.UpdateBeer

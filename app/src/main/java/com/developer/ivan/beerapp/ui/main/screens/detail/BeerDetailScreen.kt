@@ -1,7 +1,6 @@
-package com.developer.ivan.beerapp.ui.main.screens
+package com.developer.ivan.beerapp.ui.main.screens.detail
 
 
-import ImageUrlPainter
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -20,14 +19,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.developer.ivan.beerapp.R
+import com.developer.ivan.beerapp.androidbase.components.DescriptionSection
+import com.developer.ivan.beerapp.androidbase.components.ImageUrlPainter
+import com.developer.ivan.beerapp.androidbase.components.TitleSection
 import com.developer.ivan.beerapp.theme.Green_50
 import com.developer.ivan.beerapp.theme.Red_60
-import com.developer.ivan.beerapp.ui.main.screens.detail.BeerDetailState
-import com.developer.ivan.beerapp.ui.main.screens.detail.BeerDetailViewModel
 
 @Composable
 fun BeerDetailScreen(
@@ -195,7 +194,7 @@ fun BeerInfoTitle(
                         .height(40.dp), onClick = {
                         onButtonSwitch()
                     }) {
-                        Text(text = stringResource(id = textSwitchAvailability))
+                    Text(text = stringResource(id = textSwitchAvailability))
                 }
 
             }
@@ -214,36 +213,10 @@ fun BeerInfoSection(title: String, content: String?) {
         TitleSection(title = title)
         Spacer(modifier = Modifier.height(16.dp))
         content?.let {
-            DescriptionSection(it)
+            DescriptionSection(subtitle = it)
         } ?: run {
             Text(text = stringResource(id = R.string.no_content))
         }
 
     }
-}
-
-@Composable
-fun TitleSection(title: String) {
-    Text(
-        text = title,
-        modifier = Modifier
-            .fillMaxWidth(),
-        color = MaterialTheme.colors.onSurface,
-        style = MaterialTheme.typography.subtitle1,
-        fontWeight = FontWeight.W600,
-        textAlign = TextAlign.Start
-    )
-}
-
-@Composable
-fun DescriptionSection(subtitle: String) {
-    Text(
-        text = subtitle,
-        modifier = Modifier
-            .fillMaxWidth(),
-        color = MaterialTheme.colors.onSurface,
-        style = MaterialTheme.typography.subtitle2,
-        fontWeight = FontWeight.W400,
-        textAlign = TextAlign.Start
-    )
 }

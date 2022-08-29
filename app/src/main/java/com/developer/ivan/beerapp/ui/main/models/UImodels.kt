@@ -1,7 +1,7 @@
 package com.developer.ivan.beerapp.ui.main.models
 
 import android.os.Parcelable
-import com.developer.ivan.beerapp.ui.utils.UniqueItem
+import com.developer.ivan.beerapp.androidbase.utils.UniqueItem
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
