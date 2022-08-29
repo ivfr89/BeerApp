@@ -1,4 +1,4 @@
-package com.developer.ivan.beerapp.ui.navigation
+package com.developer.ivan.beerapp.androidbase.navigation
 
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
