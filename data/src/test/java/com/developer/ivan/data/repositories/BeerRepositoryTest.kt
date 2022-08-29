@@ -1,124 +1,102 @@
 package com.developer.ivan.data.repositories
 
+import com.developer.ivan.data.models.BeerMother
 import com.developer.ivan.datasources.LocalDataSource
 import com.developer.ivan.datasources.RemoteDataSource
-import com.developer.ivan.domain.Either
-import com.developer.ivan.domain.Failure
-import com.developer.testshared.beerList
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
-import junit.framework.Assert.assertEquals
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
+import com.developer.ivan.domain.*
+import io.mockk.*
 import kotlinx.coroutines.runBlocking
-import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.anyInt
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
-class BusRepositoryTest {
+class UserDataRepositoryTest {
 
-    @Mock
-    lateinit var localDataSource: LocalDataSource
-
-    @Mock
-    lateinit var remoteDataSource: RemoteDataSource
-
-    private lateinit var beerRepository: BeerRepository
-
-
-    @Before
-    fun setUp() {
-        beerRepository = BeerRepositoryImplementation(localDataSource, remoteDataSource)
-
-        runBlocking {
-            whenever(localDataSource.countBeers()).thenReturn(beerList.size)
-        }
-    }
+    private val mother: BeerMother = BeerMother()
+    private val remoteDataSource = mockk<RemoteDataSource>(relaxed = true)
+    private val localDataSource = mockk<LocalDataSource>(relaxed = true)
+    private val repository = BeerDataRepository(
+        localDataSource = localDataSource,
+        remoteDataSource = remoteDataSource
+    )
 
     @Test
-    fun `getBeers always returns data from local data source if forceReload param its true`() {
+    fun `getBeers always returns data from local data source if forceReload param is true`() {
         runBlocking {
-            val forceParam = true
-            val remoteData = Either.Right(beerList)
-            val localData = flow { emit(remoteData) }
+            val expectedParam = true
 
-            whenever(localDataSource.getLocalBeers()).thenReturn(localData)
-            whenever(remoteDataSource.getBeers(anyInt(), anyInt())).thenReturn(remoteData)
+            givenAnySuccessfullyResponseOnDataSources()
 
-            beerRepository.getBeers(forceParam).collect {
-                assertEquals(Either.Right(beerList), it)
+            repository.getBeers(expectedParam, mother.givenAnyNumber(), mother.givenAnyNumber())
+
+            coVerify(exactly = 1) {
+                localDataSource.getLocalBeers()
             }
         }
     }
 
     @Test
-    fun `getBeers always returns data from local data source if forceReload param its false`() {
+    fun `getBeers always returns data from local data source if forceReload param is false`() {
         runBlocking {
+            val expectedParam = false
 
-            val forceParam = false
-            val remoteData = Either.Right(beerList)
-            val localData = flow { emit(remoteData) }
+            givenAnySuccessfullyResponseOnDataSources()
 
-            whenever(localDataSource.getLocalBeers()).thenReturn(localData)
-            whenever(remoteDataSource.getBeers(anyInt(), anyInt())).thenReturn(remoteData)
+            repository.getBeers(expectedParam, mother.givenAnyNumber(), mother.givenAnyNumber())
 
-            beerRepository.getBeers(forceParam).collect {
-                assertEquals(Either.Right(beerList), it)
+            coVerify(exactly = 1) {
+                localDataSource.getLocalBeers()
+            }
+
+            coVerify(inverse = true) {
+                remoteDataSource.getBeers(any(), any())
             }
         }
     }
 
     @Test
-    fun `getBeers insert remote data always on localdatasource`() {
+    fun `getBeers inserts remote data always on localdatasource`() {
         runBlocking {
+            val expectedParam = true
+            val expectedInsertedData = listOf(mother.givenABeer())
 
-            val remoteData = Either.Right(beerList)
-            val localData = flow { emit(remoteData) }
+            givenAnySuccessfullyResponseOnDataSources()
 
-            whenever(localDataSource.getLocalBeers()).thenReturn(localData)
-            whenever(remoteDataSource.getBeers(anyInt(), anyInt())).thenReturn(remoteData)
+            repository.getBeers(expectedParam, mother.givenAnyNumber(), mother.givenAnyNumber())
 
-            beerRepository.getBeers(false).collect {
-                verify(remoteDataSource).getBeers(anyInt(), anyInt())
-                verify(localDataSource).insertBeers(any())
-            }
-
-
-        }
-    }
-
-    @Test
-    fun `getBeer obtain a local existing Beer `() {
-        runBlocking {
-
-            val localData = flow { emit(Either.Right(beerList[0])) }
-
-            whenever(localDataSource.getLocalBeer(1)).thenReturn(localData)
-
-            beerRepository.getBeer(1).collect {
-                assertEquals(Either.Right(beerList[0]), it)
+            coVerifyOrder {
+                remoteDataSource.getBeers(any(), any())
+                localDataSource.insertBeers(expectedInsertedData)
             }
         }
     }
 
     @Test
-    fun `getBeer obtain a null result if Beer doesnt exists`() {
+    fun `getBeer obtain a local existing Beer`() {
         runBlocking {
+            val expectedId = mother.givenAnyId()
+            val expectedBeer = mother.givenABeer(id = expectedId)
 
-            val localData = flow { emit(Either.Left(Failure.NullResult)) }
+            coEvery { localDataSource.getLocalBeer(expectedId) } returns expectedBeer.toRight()
 
-            whenever(localDataSource.getLocalBeer(-1)).thenReturn(localData)
-
-            beerRepository.getBeer(-1).collect {
-                assertEquals(Either.Left(Failure.NullResult), it)
-            }
+            val response = repository.getBeer(expectedId)
+            assert(response.exists { it == expectedBeer })
         }
     }
 
+    @Test
+    fun `getBeer obtain a null result if Beer doesn't exists`() {
+        runBlocking {
+            val expectedId = mother.givenAnyId()
+            val expectedBeer = mother.givenABeer(id = expectedId)
 
+            coEvery { localDataSource.getLocalBeer(expectedId) } returns Failure.NullResult.toLeft()
+
+            val response = repository.getBeer(expectedId)
+            assert(response.swap().exists { it is Failure.NullResult })
+        }
+    }
+
+    private fun givenAnySuccessfullyResponseOnDataSources(localData: List<Beer> = listOf(mother.givenABeer())) {
+        coEvery { localDataSource.getLocalBeers() } returns localData.toRight()
+        coEvery { remoteDataSource.getBeers(any(), any()) } returns localData.toRight()
+    }
 }
