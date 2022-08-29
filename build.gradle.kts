@@ -16,6 +16,7 @@ plugins {
 
 allprojects {
     apply(from = "$rootDir/detekt.gradle")
+    apply(from = "$rootDir/ktlint.gradle.kts")
     repositories {
         maven(url = "https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
         google()
