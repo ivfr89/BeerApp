@@ -4,10 +4,8 @@ import com.developer.ivan.datasources.LocalDataSource
 import com.developer.ivan.datasources.RemoteDataSource
 import com.developer.ivan.domain.*
 import com.developer.ivan.repository.BeerRepository
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@OptIn(ExperimentalCoroutinesApi::class)
-class BeerRepositoryImplementation(
+class BeerDataRepository(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
 ) : BeerRepository {
@@ -16,18 +14,22 @@ class BeerRepositoryImplementation(
         localDataSource.countBeers().toRight()
 
     override suspend fun getBeers(
+        force: Boolean,
         page: Int,
         size: Int
-    ): Either<Failure, List<Beer>> {
-
-        remoteDataSource.getBeers(page, size).flatMap { beers ->
-            localDataSource.insertBeers(beers)
-            Either.Right(beers)
+    ): Either<Failure, List<Beer>> =
+        when (force) {
+            true -> {
+                remoteDataSource.getBeers(page, size).flatMap { beers ->
+                    localDataSource.insertBeers(beers)
+                    Either.Right(beers)
+                }
+                localDataSource.getLocalBeers()
+            }
+            false -> {
+                localDataSource.getLocalBeers()
+            }
         }
-
-        return localDataSource.getLocalBeers()
-
-    }
 
     override suspend fun getBeer(id: Int): Either<Failure, Beer> =
         localDataSource.getLocalBeer(id)
@@ -36,5 +38,4 @@ class BeerRepositoryImplementation(
         localDataSource.updateBeer(beer)
         return Either.Right(Unit)
     }
-
 }

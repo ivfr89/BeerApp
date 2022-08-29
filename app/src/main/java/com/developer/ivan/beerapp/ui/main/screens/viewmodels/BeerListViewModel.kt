@@ -1,4 +1,4 @@
-package com.developer.ivan.beerapp.ui.main.fragments
+package com.developer.ivan.beerapp.ui.main.screens.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,7 +11,6 @@ import com.developer.ivan.interactors.GetBeers
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -28,14 +27,14 @@ class BeerListViewModel @Inject constructor(
         MutableStateFlow(BeerListState.Idle)
     val state: StateFlow<BeerListState> = localState
 
-    fun getBeers(fromStart: Boolean = true) {
+    fun getBeers(fromStart: Boolean = true, force: Boolean = true) {
 
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher) {
             if (fromStart)
-                BeerListState.IsLoading.postOn(localState)
-            getBeers(Unit)
+                BeerListState.Loading.postOn(localState)
+            getBeers(GetBeers.Params(force))
                 .map { listBeers ->
-                    BeerListState.ShowItems(listBeers.toUi()).postOn(localState)
+                    BeerListState.WithItems(listBeers.toUi()).postOn(localState)
                 }.mapLeft {
                     handleFailure(it)
                 }
@@ -43,13 +42,13 @@ class BeerListViewModel @Inject constructor(
     }
 
     fun loadMore() {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher) {
             when (val currentState = state.value) {
                 BeerListState.Idle,
                 is BeerListState.Error,
-                BeerListState.IsLoading,
+                BeerListState.Loading,
                 is BeerListState.Paging -> Unit
-                is BeerListState.ShowItems -> {
+                is BeerListState.WithItems -> {
                     BeerListState.Paging(
                         currentState.beerList
                     ).postOn(localState)

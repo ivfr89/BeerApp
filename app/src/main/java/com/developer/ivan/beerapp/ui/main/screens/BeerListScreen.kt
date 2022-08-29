@@ -27,7 +27,7 @@ import com.developer.ivan.beerapp.R
 import com.developer.ivan.beerapp.theme.Red_60
 import com.developer.ivan.beerapp.theme.shimmerTheme
 import com.developer.ivan.beerapp.ui.main.BeerListState
-import com.developer.ivan.beerapp.ui.main.fragments.BeerListViewModel
+import com.developer.ivan.beerapp.ui.main.screens.viewmodels.BeerListViewModel
 import com.developer.ivan.beerapp.ui.main.mapLazyType
 import com.developer.ivan.beerapp.ui.main.models.BeerUi
 import com.developer.ivan.beerapp.ui.utils.InfiniteListHandler
@@ -46,7 +46,7 @@ fun BeerListScreen(
 ) {
     var forceReload by rememberSaveable { mutableStateOf(true) }
 
-    viewModel.getBeers(forceReload)
+    viewModel.getBeers(fromStart = forceReload, force = forceReload)
 
     HandleObserverStates(
         viewModel = viewModel,
@@ -75,9 +75,9 @@ fun HandleObserverStates(
     when (state) {
         BeerListState.Idle -> Unit
         is BeerListState.Error -> Unit
-        BeerListState.IsLoading,
+        BeerListState.Loading,
         is BeerListState.Paging,
-        is BeerListState.ShowItems -> {
+        is BeerListState.WithItems -> {
             LazyColumnPaginable<BeerUi>(
                 verticalArrangement = Arrangement.spacedBy(2.dp),
                 lazyState = lazyState,
