@@ -10,8 +10,12 @@ buildscript {
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.43")
     }
 }
+plugins {
+    id("io.gitlab.arturbosch.detekt") version "1.21.0"
+}
 
 allprojects {
+    apply(from = "$rootDir/detekt.gradle")
     repositories {
         maven(url = "https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
         google()
