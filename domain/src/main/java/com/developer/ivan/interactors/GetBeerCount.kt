@@ -9,5 +9,4 @@ class GetBeerCount(private val beerRepository: BeerRepository) :
 
     override suspend fun execute(params: Unit): Either<Failure, Int> =
         beerRepository.getBeerCount()
-
 }

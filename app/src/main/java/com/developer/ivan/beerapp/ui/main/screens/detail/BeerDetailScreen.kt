@@ -1,6 +1,5 @@
 package com.developer.ivan.beerapp.ui.main.screens.detail
 
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -99,9 +98,7 @@ fun HandleObserverStates(
                         buildString { item.foodPairing.forEach { appendLine(it) } }
                     )
                 }
-
             }
-
         }
     }
 }
@@ -125,10 +122,8 @@ private fun BeerInfoHeader(imageUrl: String?) {
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
-
     }
 }
-
 
 @Composable
 fun BeerInfoTitle(
@@ -137,7 +132,6 @@ fun BeerInfoTitle(
     isAvailable: Boolean,
     onButtonSwitch: () -> Unit
 ) {
-
     val textSwitchAvailability =
         if (isAvailable) R.string.set_not_available else R.string.set_available
 
@@ -148,7 +142,6 @@ fun BeerInfoTitle(
         modifier = Modifier
             .fillMaxWidth()
     ) {
-
         Column(
             modifier = Modifier
                 .align(Alignment.CenterVertically)
@@ -193,7 +186,6 @@ fun BeerInfoTitle(
                             modifier = Modifier.size(16.dp, 16.dp),
                             tint = Color.Red
                         )
-
                     }
                 }
 
@@ -203,12 +195,13 @@ fun BeerInfoTitle(
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                         .fillMaxWidth()
-                        .height(40.dp), onClick = {
+                        .height(40.dp),
+                    onClick = {
                         onButtonSwitch()
-                    }) {
+                    }
+                ) {
                     Text(text = stringResource(id = textSwitchAvailability))
                 }
-
             }
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -229,6 +222,5 @@ fun BeerInfoSection(title: String, content: String?) {
         } ?: run {
             Text(text = stringResource(id = R.string.no_content))
         }
-
     }
 }

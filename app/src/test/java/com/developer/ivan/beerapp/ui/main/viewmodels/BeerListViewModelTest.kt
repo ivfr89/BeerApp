@@ -64,7 +64,6 @@ class BeerListViewModelTest : ViewModelTest() {
 
     @Test
     fun `getBeers method should NOT set Loading state if beers are not fetched from start`() {
-
         viewModel.getBeers(false)
 
         verify(exactly = 0) {
@@ -103,7 +102,7 @@ class BeerListViewModelTest : ViewModelTest() {
 
     private fun givenAnyFailureResponseOnGetBeers() {
         coEvery { getBeersInteractor(GetBeers.Params()) } returns
-                Failure.ElementNotFound("No beers found")
-                    .toLeft()
+            Failure.ElementNotFound("No beers found")
+                .toLeft()
     }
 }

@@ -19,9 +19,9 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,7 +34,6 @@ import com.developer.ivan.beerapp.androidbase.theme.shimmerTheme
 import com.valentinilk.shimmer.ShimmerBounds
 import com.valentinilk.shimmer.rememberShimmer
 import com.valentinilk.shimmer.shimmer
-
 
 @Composable
 fun SmallCard(
@@ -59,14 +58,14 @@ fun SmallCard(
                 ) { onClick?.invoke() },
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (imageLoadError)
+            if (imageLoadError) {
                 Icon(
                     modifier = Modifier
                         .size(50.dp),
                     painter = painterResource(id = iconDrawableRes),
                     contentDescription = null
                 )
-            else {
+            } else {
                 ImageUrlPainter(
                     modifier = Modifier
                         .size(50.dp)
@@ -74,7 +73,7 @@ fun SmallCard(
                     url = url,
                     onLoadImageError = {
                         imageLoadError = true
-                    },
+                    }
                 )
             }
             Spacer(Modifier.width(16.dp))
@@ -95,7 +94,6 @@ fun SmallCard(
                 )
             }
         }
-
     }
 }
 

@@ -2,12 +2,12 @@ package com.developer.ivan.data.server
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import kotlin.reflect.KClass
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import kotlin.reflect.KClass
 
 class ApiClientBuilder(
     baseUrl: String,
-    okHttpClient: OkHttpClient,
+    okHttpClient: OkHttpClient
 ) {
     private val retrofit: Retrofit = Retrofit.Builder().client(okHttpClient)
         .addConverterFactory(ScalarsConverterFactory.create())

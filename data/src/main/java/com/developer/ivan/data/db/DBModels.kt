@@ -7,11 +7,10 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
-
 class Converters {
 
     private val moshi = Moshi.Builder()
-            .add(KotlinJsonAdapterFactory()).build()
+        .add(KotlinJsonAdapterFactory()).build()
 
     @TypeConverter
     fun fromString(value: String): List<String> {
@@ -24,7 +23,6 @@ class Converters {
 
     @TypeConverter
     fun fromArrayList(list: List<String>): String {
-
         val listType = Types.newParameterizedType(
             List::class.java,
             String::class.java
@@ -32,7 +30,6 @@ class Converters {
         return moshi.adapter<List<String>>(listType).toJson(list)
     }
 }
-
 
 @Entity(primaryKeys = ["id"])
 @TypeConverters(value = [Converters::class])

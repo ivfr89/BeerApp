@@ -15,7 +15,6 @@ class UpdateBeerTest {
 
     @Test
     fun `invoke should call beerRepository method`() {
-
         val expectedBeer = mother.givenABeer()
 
         runBlocking {

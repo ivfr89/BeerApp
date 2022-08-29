@@ -12,8 +12,7 @@ class JsonMapper(private val moshi: Moshi) {
 
     object JsonSyntaxException : Failure.CustomFailure()
 
-
-    inline fun <T> getArray(json: String, body: JsonMapper.(JSONArray)->T): T {
+    inline fun <T> getArray(json: String, body: JsonMapper.(JSONArray) -> T): T {
         return body(JSONArray(json))
     }
 
@@ -27,7 +26,6 @@ class JsonMapper(private val moshi: Moshi) {
             } ?: kotlin.run {
                 Either.Left(JsonSyntaxException)
             }
-
         } catch (e: JSONException) {
             Either.Left(JsonSyntaxException)
         }
@@ -47,7 +45,6 @@ class JsonMapper(private val moshi: Moshi) {
         json: JSONArray,
         transform: (BeerApiModel) -> Either<Failure, Beer>
     ): Either<Failure, List<Beer>> {
-
         val list = mutableListOf<Beer>()
         var result: Either<Failure, List<Beer>> = Either.Right(list)
 
@@ -67,7 +64,7 @@ class JsonMapper(private val moshi: Moshi) {
                 }
                 index++
             }
-        }catch (e: JSONException){
+        } catch (e: JSONException) {
             result = Either.Left(JsonSyntaxException)
         }
         return result

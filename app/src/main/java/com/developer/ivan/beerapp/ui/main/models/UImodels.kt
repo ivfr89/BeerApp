@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:filename")
+
 package com.developer.ivan.beerapp.ui.main.models
 
 import android.os.Parcelable

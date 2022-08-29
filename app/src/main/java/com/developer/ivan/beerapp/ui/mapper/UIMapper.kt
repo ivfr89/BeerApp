@@ -21,16 +21,15 @@ fun List<Beer>.toUi() =
         beer.toUi()
     }
 
-
 fun Beer.toUi() =
-        BeerUi(
-            id = id.toString(),
-            name = name,
-            tagline = tagline,
-            description = description,
-            imageUrl = imageUrl,
-            alcoholByVolume = alcoholByVolume,
-            ibu = ibu,
-            foodPairing = foodPairing,
-            isAvailable = isAvailable
-        )
+    BeerUi(
+        id = id.toString(),
+        name = name,
+        tagline = tagline,
+        description = description,
+        imageUrl = imageUrl,
+        alcoholByVolume = alcoholByVolume,
+        ibu = ibu,
+        foodPairing = foodPairing,
+        isAvailable = isAvailable
+    )

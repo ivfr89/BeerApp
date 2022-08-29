@@ -28,14 +28,12 @@ class BeerDetailViewModel @Inject constructor(
 
     private lateinit var beerUi: BeerUi
 
-
     private var localState = MutableStateFlow<BeerDetailState>(BeerDetailState.Idle)
 
     val state: StateFlow<BeerDetailState>
         get() = localState
 
     fun getBeer(id: Int) {
-
         viewModelScope.launch(dispatcher) {
             BeerDetailState.Loading.postOn(localState)
 

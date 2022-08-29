@@ -14,6 +14,5 @@ object Constants {
         object OkHTTPConfig {
             const val timeOut = 15000L
         }
-
     }
 }

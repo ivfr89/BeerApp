@@ -47,7 +47,6 @@ fun BeerAppTheme(
         shapes = Shapes,
         content = content
     )
-
 }
 
 val shimmerTheme = defaultShimmerTheme.copy(

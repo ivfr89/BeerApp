@@ -4,7 +4,6 @@ import com.developer.ivan.domain.Constants
 import retrofit2.Response
 import retrofit2.http.Query
 
-
 interface ApiService {
 
     @retrofit2.http.GET(Constants.Server.Beer.GET_BEERS)

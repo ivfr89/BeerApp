@@ -15,7 +15,6 @@ import com.developer.ivan.datasources.LocalDataSource
 import com.developer.ivan.datasources.RemoteDataSource
 import com.developer.ivan.domain.Constants
 import com.developer.ivan.repository.BeerRepository
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -24,10 +23,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
-import okhttp3.MediaType
 import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
@@ -42,7 +38,6 @@ class DataModule {
         .callTimeout(Constants.Server.OkHTTPConfig.timeOut, TimeUnit.MILLISECONDS)
         .connectTimeout(Constants.Server.OkHTTPConfig.timeOut, TimeUnit.MILLISECONDS)
         .build()
-
 
     @Singleton
     @Named("base_url")
@@ -69,7 +64,6 @@ class DataModule {
     @Provides
     fun provideConnectionManager(app: Application): ConnectionManager =
         LocalConnectivityManager(app)
-
 
     @Singleton
     @Provides
@@ -104,8 +98,7 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideMoshi(
-    ): Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    fun provideMoshi(): Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
     @Singleton
     @Provides

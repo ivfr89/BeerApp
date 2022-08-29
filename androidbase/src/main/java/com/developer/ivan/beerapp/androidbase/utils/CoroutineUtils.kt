@@ -23,7 +23,6 @@ interface CoroutineUtils {
         }
     }
 
-
     fun <T> CoroutineScope.launchAndPost(
         stateFlow: MutableStateFlow<T>,
         context: CoroutineContext = coroutineContext,

@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:filename")
+
 package com.developer.ivan.beerapp.androidbase.components
 
 import androidx.compose.animation.core.animateFloatAsState
@@ -39,7 +41,7 @@ fun ImageUrlPainter(
                     bitmap = bitmap,
                     modifier = Modifier.alpha(alpha),
                     contentDescription = null,
-                    contentScale = ContentScale.Crop,
+                    contentScale = ContentScale.Crop
                 )
             }
         },

@@ -34,12 +34,12 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.developer.ivan.beerapp.R
-import com.developer.ivan.beerapp.theme.BeerAppTheme
-import com.developer.ivan.beerapp.ui.main.screens.detail.BeerDetailScreen
 import com.developer.ivan.beerapp.androidbase.navigation.Feature
 import com.developer.ivan.beerapp.androidbase.navigation.NavArg
 import com.developer.ivan.beerapp.androidbase.navigation.NavCommand
 import com.developer.ivan.beerapp.androidbase.navigation.NavItem
+import com.developer.ivan.beerapp.theme.BeerAppTheme
+import com.developer.ivan.beerapp.ui.main.screens.detail.BeerDetailScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -71,7 +71,6 @@ class MainActivity : AppCompatActivity() {
 
     @Composable
     fun BeerApp(navController: NavHostController = rememberNavController()) {
-
         val systemUiController = rememberSystemUiController()
         val colorForSystemUi = MaterialTheme.colors.primaryVariant
 
@@ -88,11 +87,9 @@ class MainActivity : AppCompatActivity() {
                         .fillMaxWidth()
                         .height(48.dp),
                     verticalAlignment = Alignment.CenterVertically
-                )
-                {
+                ) {
                     Toolbar(showUpNavigation, navController)
                 }
-
             },
             content = { padding ->
                 Box(modifier = Modifier.padding(padding)) {

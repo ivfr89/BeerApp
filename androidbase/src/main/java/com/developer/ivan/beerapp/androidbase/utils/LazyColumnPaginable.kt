@@ -15,7 +15,7 @@ fun <T : UniqueItem> LazyColumnPaginable(
     modifier: Modifier = Modifier,
     lazyState: LazyListState,
     lazyType: LazyType,
-    verticalArrangement : Arrangement.Vertical,
+    verticalArrangement: Arrangement.Vertical,
     contentSkeleton: (@Composable () -> Unit)? = null,
     loader: (@Composable () -> Unit)? = null,
     content: (@Composable (T) -> Unit)? = null

@@ -30,7 +30,7 @@ import com.developer.ivan.beerapp.ui.main.screens.viewmodels.BeerListViewModel
 @Composable
 fun BeerListScreen(
     viewModel: BeerListViewModel = hiltViewModel(),
-    onNavigateToBeerDetail: (id: Int) -> Unit,
+    onNavigateToBeerDetail: (id: Int) -> Unit
 ) {
     var forceReload by rememberSaveable { mutableStateOf(true) }
 

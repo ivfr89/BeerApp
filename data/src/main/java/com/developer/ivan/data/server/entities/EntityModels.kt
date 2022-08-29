@@ -1,4 +1,5 @@
 @file:Suppress("ConstructorParameterNaming")
+
 package com.developer.ivan.data.server.entities
 
 data class BeerApiModel(

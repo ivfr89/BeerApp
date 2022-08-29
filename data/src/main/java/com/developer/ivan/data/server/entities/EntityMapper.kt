@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:filename")
+
 package com.developer.ivan.data.server.entities
 
 import com.developer.ivan.domain.Beer

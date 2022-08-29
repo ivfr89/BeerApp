@@ -1,7 +1,7 @@
 package com.developer.ivan
 
-import com.developer.ivan.models.BeerMother
 import com.developer.ivan.interactors.GetBeerById
+import com.developer.ivan.models.BeerMother
 import com.developer.ivan.repository.BeerRepository
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -25,5 +25,4 @@ class GetBeerByIdTest {
             beerRepository.getBeer(expectedBeerId)
         }
     }
-
 }

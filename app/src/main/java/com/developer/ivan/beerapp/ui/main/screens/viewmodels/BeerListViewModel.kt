@@ -28,10 +28,10 @@ class BeerListViewModel @Inject constructor(
     val state: StateFlow<BeerListState> = localState
 
     fun getBeers(fromStart: Boolean = true, force: Boolean = true) {
-
         viewModelScope.launch(dispatcher) {
-            if (fromStart)
+            if (fromStart) {
                 BeerListState.Loading.postOn(localState)
+            }
             getBeers(GetBeers.Params(force))
                 .map { listBeers ->
                     BeerListState.WithItems(listBeers.toUi()).postOn(localState)

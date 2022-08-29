@@ -20,9 +20,9 @@ class RoomDataSource(
     override suspend fun getLocalBeers(): Either<Failure, List<Beer>> =
         withContext(Dispatchers.IO) {
             val beerList = database.beerDao().getAllBeers()
-            if (beerList.isEmpty())
+            if (beerList.isEmpty()) {
                 Either.Left(EmptyList)
-            else beerList.toDomain().toRight()
+            } else beerList.toDomain().toRight()
         }
 
     override suspend fun getLocalBeer(id: Int): Either<Failure, Beer> =

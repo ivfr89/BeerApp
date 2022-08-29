@@ -93,6 +93,6 @@ class BeerDetailViewModelTest : ViewModelTest() {
 
     private fun givenAnySuccessResponseOnUpdateBeer(beer: Beer) {
         coEvery { updateBeerInteractor(UpdateBeer.Params(beer)) } returns
-                Unit.toRight()
+            Unit.toRight()
     }
 }

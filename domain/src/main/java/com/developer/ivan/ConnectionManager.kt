@@ -1,5 +1,5 @@
 package com.developer.ivan
 
 interface ConnectionManager {
-  fun isConnected(): Boolean
+    fun isConnected(): Boolean
 }

@@ -21,22 +21,20 @@ fun BeerDb.toDomain(): Beer =
         isAvailable = isAvailable
     )
 
-
 fun List<Beer>.toDatabase() =
     map { beer ->
         beer.toDatabase()
     }
 
-
 fun Beer.toDatabase() =
-        BeerDb(
-            id = id,
-            name = name,
-            tagline = tagline,
-            description = description,
-            imageUrl = imageUrl,
-            alcoholByVolume = alcoholByVolume,
-            ibu = ibu,
-            foodPairing = foodPairing,
-            isAvailable = isAvailable
-        )
+    BeerDb(
+        id = id,
+        name = name,
+        tagline = tagline,
+        description = description,
+        imageUrl = imageUrl,
+        alcoholByVolume = alcoholByVolume,
+        ibu = ibu,
+        foodPairing = foodPairing,
+        isAvailable = isAvailable
+    )

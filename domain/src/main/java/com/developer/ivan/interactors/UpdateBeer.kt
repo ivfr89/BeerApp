@@ -12,5 +12,4 @@ class UpdateBeer(private val beerRepository: BeerRepository) :
         beerRepository.updateBeer(params.beer)
 
     class Params(val beer: Beer)
-
 }

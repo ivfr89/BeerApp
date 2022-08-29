@@ -32,7 +32,6 @@ sealed class NavCommand(
     val args = navArgs.map {
         navArgument(it.key) { type = it.navType }
     }
-
 }
 
 enum class NavArg(val key: String, val navType: NavType<*>) {

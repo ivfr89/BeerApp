@@ -18,7 +18,6 @@ class BeerApiClient(
 ) : RemoteDataSource,
     NetworkManager by NetworkManager.NetworkImplementation() {
 
-
     object ConnectionError : Failure.CustomFailure()
 
     override suspend fun getBeers(page: Int, size: Int): Either<Failure, List<Beer>> =
@@ -31,7 +30,7 @@ class BeerApiClient(
             ) { response ->
                 jsonMapper.getArray(response) {
                     convertJsonToBeers(it) {
-                        entityBeer ->
+                            entityBeer ->
                         entityBeer.toDomain().toRight()
                     }
                 }

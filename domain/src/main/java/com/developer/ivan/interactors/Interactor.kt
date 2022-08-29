@@ -5,7 +5,7 @@ import com.developer.ivan.domain.Failure
 
 abstract class Interactor<Params, Return> {
 
-    suspend operator fun invoke(params: Params) : Either<Failure, Return> {
+    suspend operator fun invoke(params: Params): Either<Failure, Return> {
         return execute(params)
     }
 

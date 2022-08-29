@@ -7,21 +7,20 @@ import androidx.room.Query
 import androidx.room.Update
 
 @Dao
-interface BeerDao{
+interface BeerDao {
 
     @Query("SELECT * FROM BeerDb")
-    fun getAllBeers() : List<BeerDb>
+    fun getAllBeers(): List<BeerDb>
 
     @Query("SELECT * FROM BeerDb WHERE id=:id")
-    fun getBeer(id: Int) : BeerDb?
+    fun getBeer(id: Int): BeerDb?
 
     @Query("SELECT COUNT(*) FROM BeerDb")
-    fun getBeersCount() : Int
+    fun getBeersCount(): Int
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertBeers(beerDb: List<BeerDb>)
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
     fun updateBeer(beerDb: BeerDb)
-
 }
