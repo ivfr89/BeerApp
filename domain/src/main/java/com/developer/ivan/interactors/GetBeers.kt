@@ -7,9 +7,9 @@ class GetBeers(
     private val getBeerCount: GetBeerCount,
     private val beerRepository: BeerRepository
 ) :
-    Interactor<Unit, List<Beer>>() {
+    Interactor<GetBeers.Params, List<Beer>>() {
 
-    override suspend fun execute(params: Unit): Either<Failure, List<Beer>> =
+    override suspend fun execute(params: Params): Either<Failure, List<Beer>> =
         getBeerCount(Unit)
             .flatMap { count ->
 
@@ -23,7 +23,10 @@ class GetBeers(
                         else -> value
                     } + 1
 
-                beerRepository.getBeers(page, size)
+                beerRepository.getBeers(force = params.forceReload, page, size)
             }
 
+    data class Params(
+        val forceReload: Boolean = true
+    )
 }
