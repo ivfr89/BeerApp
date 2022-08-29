@@ -10,6 +10,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.*
@@ -23,6 +24,7 @@ import com.developer.ivan.beerapp.ui.navigation.Feature
 import com.developer.ivan.beerapp.ui.navigation.NavArg
 import com.developer.ivan.beerapp.ui.navigation.NavCommand
 import com.developer.ivan.beerapp.ui.navigation.NavItem
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -33,10 +35,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        lifecycleScope.launch {
-            delay(300)
-            window.setBackgroundDrawableResource(android.R.color.transparent)
-        }
+        overlayFixForMiUIDevices()
 
         setContent {
             BeerAppTheme {
@@ -47,9 +46,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun overlayFixForMiUIDevices() {
+        lifecycleScope.launch {
+            delay(300)
+            window.setBackgroundDrawableResource(android.R.color.transparent)
+        }
+    }
+
     @Composable
     fun BeerApp(navController: NavHostController = rememberNavController()) {
 
+        val systemUiController = rememberSystemUiController()
+        val colorForSystemUi = MaterialTheme.colors.primaryVariant
 
         val currentRoute: String =
             navController.currentBackStackEntryAsState().value?.destination?.route
@@ -76,11 +84,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         )
+
+        SideEffect {
+            systemUiController.setSystemBarsColor(color = colorForSystemUi)
+        }
     }
 
     @Composable
     fun Navigation(navController: NavHostController) {
-
         NavHost(
             navController = navController,
             startDestination = Feature.BEER.route
@@ -88,7 +99,6 @@ class MainActivity : AppCompatActivity() {
             beerGraph(navController)
         }
     }
-
 
     private fun NavGraphBuilder.beerGraph(navController: NavController) {
         navigation(
@@ -125,4 +135,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
