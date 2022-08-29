@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     contentDescription = null,
-                    tint = MaterialTheme.colors.primaryVariant
+                    tint = MaterialTheme.colors.onSurface
                 )
             }
         } else {
