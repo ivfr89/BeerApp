@@ -2,11 +2,14 @@
     <string name="app_name">BeerApp</string>
     <string name="set_not_available">Set not available</string>
     <string name="beer_list">Beer list</string>
-    <string name="alcohol_by_volume"><b>Alcohol by volume:</b> %1$s</string>
-    <string name="bitterness">Bitterness: %1$s</string>
-    <string name="food_pairing">Food Pairing: %1$s</string>
+    <string name="description">Description</string>
+    <string name="alcohol_by_volume">Alcohol by volume</string>
+    <string name="bitterness">Bitterness</string>
+    <string name="food_pairing">Food Pairing</string>
     <string name="not_available">This product is not available</string>
     <string name="set_available">Set available</string>
     <string name="backgroundImageColor">Background color blue</string>
     <string name="beer">Beer</string>
+    <string name="no_content">No content</string>
+    <string name="available">Available</string>
 </resources>

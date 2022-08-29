@@ -1,49 +1,35 @@
 package com.developer.ivan.beerapp.ui.mapper
 
-import com.developer.ivan.beerapp.ui.main.models.UIBeer
+import com.developer.ivan.beerapp.ui.main.models.BeerUi
 import com.developer.ivan.domain.Beer
 
+fun BeerUi.toDomain(): Beer =
+    Beer(
+        id = id.toInt(),
+        name = name,
+        tagline = tagline,
+        description = description,
+        imageUrl = imageUrl,
+        alcoholByVolume = alcoholByVolume,
+        ibu = ibu,
+        foodPairing = foodPairing,
+        isAvailable = isAvailable
+    )
 
-class UIMapper {
-
-    fun convertUIBeerToDomain(uiBeer: UIBeer): Beer {
-
-        return with(uiBeer) {
-            Beer(
-                id = id,
-                name = name,
-                tagline = tagline,
-                description = description,
-                image_url = image_url,
-                abv = abv,
-                ibu = ibu,
-                food_pairing = food_pairing,
-                isAvailable = isAvailable
-            )
-        }
-
-
+fun List<Beer>.toUi() =
+    map { beer ->
+        beer.toUi()
     }
 
-    fun convertBeersToUIBeers(beers: List<Beer>) =
-        beers.map { domain ->
-            convertBeerToUIBeer(domain)
-        }
-
-
-    fun convertBeerToUIBeer(beer: Beer) =
-        with(beer) {
-            UIBeer(
-                id = id,
-                name = name,
-                tagline = tagline,
-                description = description,
-                image_url = image_url,
-                abv = abv,
-                ibu = ibu,
-                food_pairing = food_pairing,
-                isAvailable = isAvailable
-            )
-        }
-
-}
+fun Beer.toUi() =
+    BeerUi(
+        id = id.toString(),
+        name = name,
+        tagline = tagline,
+        description = description,
+        imageUrl = imageUrl,
+        alcoholByVolume = alcoholByVolume,
+        ibu = ibu,
+        foodPairing = foodPairing,
+        isAvailable = isAvailable
+    )

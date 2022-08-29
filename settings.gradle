@@ -1,6 +1,5 @@
-include ':testShared'
+include ':androidbase'
 include ':data'
-include ':usecases'
 include ':domain'
 rootProject.name='BeerApp'
 include ':app'
