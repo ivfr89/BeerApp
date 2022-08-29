@@ -140,5 +140,6 @@ object Versions {
         const val viewmodel = "2.5.1"
         const val shimmer = "1.0.3"
         const val hilt = "1.0.0"
+        const val accompanist = "0.26.2-beta"
     }
 }

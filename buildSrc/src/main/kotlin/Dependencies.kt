@@ -1,3 +1,4 @@
+import Dependencies.Compose.accompanistUiController
 import Dependencies.Compose.activity
 import Dependencies.Compose.appCompat
 import Dependencies.Compose.coil
@@ -89,6 +90,9 @@ object Dependencies {
 
         internal const val hiltNavigationCompose =
             "androidx.hilt:hilt-navigation-compose:${Versions.Compose.hilt}"
+
+        internal const val accompanistUiController =
+            "com.google.accompanist:accompanist-systemuicontroller:${Versions.Compose.accompanist}"
 
     }
 
@@ -184,6 +188,7 @@ fun DependencyHandler.implementCompose() {
     add("implementation", appCompat)
     add("implementation", navigation)
     add("implementation", hiltNavigationCompose)
+    add("implementation", accompanistUiController)
 }
 
 fun DependencyHandler.implementCore() {
