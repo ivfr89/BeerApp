@@ -19,13 +19,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.developer.ivan.beerapp.R
 import com.developer.ivan.beerapp.androidbase.components.SmallCard
 import com.developer.ivan.beerapp.androidbase.components.SmallCardSkeleton
+import com.developer.ivan.beerapp.androidbase.theme.Red_60
 import com.developer.ivan.beerapp.androidbase.utils.InfiniteListHandler
 import com.developer.ivan.beerapp.androidbase.utils.LazyColumnPaginable
-import com.developer.ivan.beerapp.theme.Red_60
-import com.developer.ivan.beerapp.ui.main.BeerListState
-import com.developer.ivan.beerapp.ui.main.mapLazyType
 import com.developer.ivan.beerapp.ui.main.models.BeerUi
-import com.developer.ivan.beerapp.ui.main.screens.viewmodels.BeerListViewModel
+import com.developer.ivan.beerapp.ui.main.screens.list.BeerListState
+import com.developer.ivan.beerapp.ui.main.screens.list.BeerListViewModel
+import com.developer.ivan.beerapp.ui.main.screens.list.mapLazyType
 
 @Composable
 fun BeerListScreen(
