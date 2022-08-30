@@ -54,12 +54,13 @@ dependencies {
     implementation(project(":androidbase"))
     implementation(project(":data"))
     implementation(project(":domain"))
-//    implementation(project(":testShared"))
 
     implementCore()
     implementFramework()
     implementCompose()
     testBase()
+    androidTestCompose()
+    debugImplementationCompose()
 }
 
 // Allow references to generated code

@@ -3,8 +3,8 @@ package com.developer.ivan.beerapp.ui.main.viewmodels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import com.developer.ivan.beerapp.model.BeerMother
-import com.developer.ivan.beerapp.ui.main.BeerListState
-import com.developer.ivan.beerapp.ui.main.screens.viewmodels.BeerListViewModel
+import com.developer.ivan.beerapp.ui.main.screens.list.BeerListState
+import com.developer.ivan.beerapp.ui.main.screens.list.BeerListViewModel
 import com.developer.ivan.beerapp.utils.ViewModelTest
 import com.developer.ivan.domain.Failure
 import com.developer.ivan.domain.toLeft

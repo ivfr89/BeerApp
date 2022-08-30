@@ -19,7 +19,9 @@ the list updates accordingly this new state
 - Coroutines and Flow
 - Room for database
 - Testing with mockk library
-- Moshi for Json parsing
+- Moshi for Json parsing 
+- Detekt rules for static code analysis
+- ktLintCheckStyle for code style analysis
 
 # Project structure
 
@@ -133,9 +135,19 @@ this transformation, the layers have a converter that allows to manage conversio
 another, so that the changes that may occur in the backend do not affect the rest of the application, and
 vice versa.
 
+# Code analysis and format
+
+detekt has been used as a code analysis tool and the necessary rules have been integrated to make it work.
+ktLint has also been used as a formatting tool to keep the code clean.
+
+All pass
+
+![Detekt](images/detekt.png)
+![ktLintCheckStyle](images/ktLintCheckStyle.png)
+
 # Testing
 
-Se ha realizado Unit testing del repositorio, casos de uso y un par de test del BeerListViewModel
+Unit testing of the repository, use cases and viewmodels have been carried out
 
 ![Test ViewModel](images/test1.png)
 ![Test Repository](images/test2.png)

@@ -36,8 +36,8 @@ import com.developer.ivan.beerapp.R
 import com.developer.ivan.beerapp.androidbase.components.DescriptionSection
 import com.developer.ivan.beerapp.androidbase.components.ImageUrlPainter
 import com.developer.ivan.beerapp.androidbase.components.TitleSection
-import com.developer.ivan.beerapp.theme.Green_50
-import com.developer.ivan.beerapp.theme.Red_60
+import com.developer.ivan.beerapp.androidbase.theme.Green_50
+import com.developer.ivan.beerapp.androidbase.theme.Red_60
 
 @Composable
 fun BeerDetailScreen(

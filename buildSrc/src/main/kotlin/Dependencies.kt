@@ -16,6 +16,8 @@ import Dependencies.Compose.runtimeLivedata
 import Dependencies.Compose.shimmer
 import Dependencies.Compose.tooling
 import Dependencies.Compose.toolingPreview
+import Dependencies.Compose.uiJunit
+import Dependencies.Compose.uiTest
 import Dependencies.Compose.uiText
 import Dependencies.Compose.uiUtil
 import Dependencies.Compose.viewBinding
@@ -93,6 +95,12 @@ object Dependencies {
 
         internal const val accompanistUiController =
             "com.google.accompanist:accompanist-systemuicontroller:${Versions.Compose.accompanist}"
+
+        internal const val uiTest =
+            "androidx.compose.ui:ui-test-manifest:${Versions.Compose.version}"
+
+        internal const val uiJunit =
+            "androidx.compose.ui:ui-test-junit4:${Versions.Compose.version}"
 
     }
 
@@ -189,6 +197,14 @@ fun DependencyHandler.implementCompose() {
     add("implementation", navigation)
     add("implementation", hiltNavigationCompose)
     add("implementation", accompanistUiController)
+}
+
+fun DependencyHandler.androidTestCompose() {
+    add("androidTestImplementation", uiJunit)
+}
+
+fun DependencyHandler.debugImplementationCompose() {
+    add("debugImplementation", uiTest)
 }
 
 fun DependencyHandler.implementCore() {

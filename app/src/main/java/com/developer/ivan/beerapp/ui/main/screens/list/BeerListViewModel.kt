@@ -1,10 +1,9 @@
-package com.developer.ivan.beerapp.ui.main.screens.viewmodels
+package com.developer.ivan.beerapp.ui.main.screens.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.developer.ivan.beerapp.androidbase.utils.CoroutineManageContext
 import com.developer.ivan.beerapp.androidbase.utils.CoroutineUtils
-import com.developer.ivan.beerapp.ui.main.BeerListState
 import com.developer.ivan.beerapp.ui.mapper.toUi
 import com.developer.ivan.domain.Failure
 import com.developer.ivan.interactors.GetBeers

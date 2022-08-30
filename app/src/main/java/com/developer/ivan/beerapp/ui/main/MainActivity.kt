@@ -38,7 +38,7 @@ import com.developer.ivan.beerapp.androidbase.navigation.Feature
 import com.developer.ivan.beerapp.androidbase.navigation.NavArg
 import com.developer.ivan.beerapp.androidbase.navigation.NavCommand
 import com.developer.ivan.beerapp.androidbase.navigation.NavItem
-import com.developer.ivan.beerapp.theme.BeerAppTheme
+import com.developer.ivan.beerapp.androidbase.theme.BeerAppTheme
 import com.developer.ivan.beerapp.ui.main.screens.detail.BeerDetailScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint

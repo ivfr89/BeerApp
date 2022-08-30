@@ -1,4 +1,4 @@
-package com.developer.ivan.beerapp.ui.main
+package com.developer.ivan.beerapp.ui.main.screens.list
 
 import com.developer.ivan.beerapp.androidbase.utils.LazyType
 import com.developer.ivan.beerapp.ui.main.models.BeerUi
