@@ -27,7 +27,9 @@ dependencies {
     kaptData()
     testBase()
     testData()
-
+    androidTestFramework()
+    androidTestCompose()
+    kaptAndroidTestFramework()
 }
 
 java {
