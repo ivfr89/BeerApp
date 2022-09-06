@@ -18,7 +18,7 @@ the list updates accordingly this new state
 - MVVM presentation pattern (Jetpack Viewmodel)
 - Coroutines and Flow
 - Room for database
-- Testing with mockk library
+- Testing with mockk library and compose ui test
 - Moshi for Json parsing 
 - Detekt rules for static code analysis
 - ktLintCheckStyle for code style analysis
@@ -147,11 +147,13 @@ All pass
 
 # Testing
 
-Unit testing of the repository, use cases and viewmodels have been carried out
+Unit testing of the repository, use cases and viewmodels have been carried out.
+Android testing using compose ui test (Experimental)
 
 ![Test ViewModel](images/test1.png)
 ![Test Repository](images/test2.png)
 ![Test UseCases](images/test3.png)
+![Test UI](images/test4.png)
 
 # Images
 

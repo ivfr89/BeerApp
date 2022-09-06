@@ -2,6 +2,7 @@ import Dependencies.Compose.accompanistUiController
 import Dependencies.Compose.activity
 import Dependencies.Compose.appCompat
 import Dependencies.Compose.coil
+import Dependencies.Compose.composeTest
 import Dependencies.Compose.foundation
 import Dependencies.Compose.fragment
 import Dependencies.Compose.hiltNavigationCompose
@@ -16,7 +17,6 @@ import Dependencies.Compose.runtimeLivedata
 import Dependencies.Compose.shimmer
 import Dependencies.Compose.tooling
 import Dependencies.Compose.toolingPreview
-import Dependencies.Compose.uiJunit
 import Dependencies.Compose.uiTest
 import Dependencies.Compose.uiText
 import Dependencies.Compose.uiUtil
@@ -42,6 +42,7 @@ import Dependencies.Data.roomKtx
 import Dependencies.Data.scalarsConverter
 import Dependencies.Framework.coreTesting
 import Dependencies.Framework.hilt
+import Dependencies.Framework.hiltAndroidTest
 import Dependencies.Framework.hiltKapt
 import Dependencies.Framework.lifecycle
 import Dependencies.Framework.livedata
@@ -99,7 +100,7 @@ object Dependencies {
         internal const val uiTest =
             "androidx.compose.ui:ui-test-manifest:${Versions.Compose.version}"
 
-        internal const val uiJunit =
+        internal const val composeTest =
             "androidx.compose.ui:ui-test-junit4:${Versions.Compose.version}"
 
     }
@@ -111,16 +112,10 @@ object Dependencies {
         internal const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
         internal const val hiltKapt = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
         internal const val coreTesting = "androidx.arch.core:core-testing:${Versions.coretesting}"
-        internal const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-
-        val implementation = listOf(
-            lifecycle,
-            hilt
-        )
-
-        val kapt = listOf(
-            hiltKapt
-        )
+        internal const val livedata =
+            "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+        internal const val hiltAndroidTest =
+            "com.google.dagger:hilt-android-testing:${Versions.hilt}"
     }
 
     object Core {
@@ -162,15 +157,8 @@ object Dependencies {
         internal const val roomKapt = "androidx.room:room-compiler:${Versions.room}"
         internal const val ktorTest = "io.ktor:ktor-client-mock:${Versions.ktor}"
         internal const val roomAndroidTest = "androidx.room:room-testing:${Versions.room}"
-        internal const val retrofitMockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.mockwebserver}"
-
-        val test = listOf(
-            ktorTest
-        )
-
-        val androidTest = listOf(
-            roomAndroidTest
-        )
+        internal const val retrofitMockWebServer =
+            "com.squareup.okhttp3:mockwebserver:${Versions.mockwebserver}"
     }
 }
 
@@ -200,7 +188,8 @@ fun DependencyHandler.implementCompose() {
 }
 
 fun DependencyHandler.androidTestCompose() {
-    add("androidTestImplementation", uiJunit)
+    add("androidTestImplementation", composeTest)
+
 }
 
 fun DependencyHandler.debugImplementationCompose() {
@@ -224,6 +213,14 @@ fun DependencyHandler.implementFramework() {
     add("implementation", hilt)
     add("implementation", livedata)
     add("kapt", hiltKapt)
+}
+
+fun DependencyHandler.androidTestFramework() {
+    add("androidTestImplementation", hiltAndroidTest)
+}
+
+fun DependencyHandler.kaptAndroidTestFramework() {
+    add("kaptAndroidTest", hiltKapt)
 }
 
 fun DependencyHandler.kaptntFramework() {
