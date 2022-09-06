@@ -16,6 +16,7 @@ android {
         targetSdk = SetupConfig.targetSdkVersion
         versionCode = SetupConfig.versionCode
         versionName = VersionName.getCustomVersionName()
+        testInstrumentationRunner = SetupConfig.testRunner
     }
 
     buildTypes {
@@ -54,13 +55,22 @@ dependencies {
     implementation(project(":androidbase"))
     implementation(project(":data"))
     implementation(project(":domain"))
+    implementation("androidx.navigation:navigation-testing:2.5.1")
+    androidTestImplementation(project(":data"))
+    androidTestImplementation("androidx.test:runner:1.4.0")
+    androidTestImplementation("androidx.test:core:1.5.0-alpha02")
+//    implementation(project(":testShared"))
 
+    implementData()
     implementCore()
     implementFramework()
     implementCompose()
     testBase()
     androidTestCompose()
     debugImplementationCompose()
+    androidTestFramework()
+    kaptAndroidTestFramework()
+    implementation ("com.google.dagger:hilt-android-testing:2.42@aar")
 }
 
 // Allow references to generated code
