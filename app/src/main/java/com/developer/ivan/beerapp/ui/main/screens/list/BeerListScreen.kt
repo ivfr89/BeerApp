@@ -1,3 +1,5 @@
+package com.developer.ivan.beerapp.ui.main.screens.list
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +16,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.developer.ivan.beerapp.R
@@ -23,9 +26,8 @@ import com.developer.ivan.beerapp.androidbase.theme.Red_60
 import com.developer.ivan.beerapp.androidbase.utils.InfiniteListHandler
 import com.developer.ivan.beerapp.androidbase.utils.LazyColumnPaginable
 import com.developer.ivan.beerapp.ui.main.models.BeerUi
-import com.developer.ivan.beerapp.ui.main.screens.list.BeerListState
-import com.developer.ivan.beerapp.ui.main.screens.list.BeerListViewModel
-import com.developer.ivan.beerapp.ui.main.screens.list.mapLazyType
+
+const val BEER_LIST_TAG = "BeerListTag"
 
 @Composable
 fun BeerListScreen(
@@ -67,6 +69,7 @@ fun HandleObserverStates(
         is BeerListState.Paging,
         is BeerListState.WithItems -> {
             LazyColumnPaginable<BeerUi>(
+                modifier = Modifier.testTag(BEER_LIST_TAG),
                 verticalArrangement = Arrangement.spacedBy(2.dp),
                 lazyState = lazyState,
                 lazyType = mapLazyType(state),
