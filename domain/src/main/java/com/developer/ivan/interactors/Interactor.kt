@@ -3,11 +3,11 @@ package com.developer.ivan.interactors
 import com.developer.ivan.domain.Either
 import com.developer.ivan.domain.Failure
 
-abstract class Interactor<Params, Return> {
+interface Interactor<Params, Return> {
 
     suspend operator fun invoke(params: Params): Either<Failure, Return> {
         return execute(params)
     }
 
-    protected abstract suspend fun execute(params: Params): Either<Failure, Return>
+    suspend fun execute(params: Params): Either<Failure, Return>
 }
