@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.developer.ivan.ConnectionManager
 import com.developer.ivan.data.db.DB
+import com.developer.ivan.data.db.LocalDataSource
 import com.developer.ivan.data.db.datasources.RoomDataSource
 import com.developer.ivan.data.repositories.BeerDataRepository
 import com.developer.ivan.data.server.ApiClientBuilder
@@ -11,8 +12,7 @@ import com.developer.ivan.data.server.ApiService
 import com.developer.ivan.data.server.JsonMapper
 import com.developer.ivan.data.server.LocalConnectivityManager
 import com.developer.ivan.data.server.datasources.BeerApiClient
-import com.developer.ivan.datasources.LocalDataSource
-import com.developer.ivan.datasources.RemoteDataSource
+import com.developer.ivan.data.server.datasources.RemoteDataSource
 import com.developer.ivan.domain.Constants
 import com.developer.ivan.repository.BeerRepository
 import com.squareup.moshi.Moshi

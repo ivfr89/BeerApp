@@ -5,7 +5,6 @@ import com.developer.ivan.data.server.ApiService
 import com.developer.ivan.data.server.JsonMapper
 import com.developer.ivan.data.server.NetworkManager
 import com.developer.ivan.data.server.entities.toDomain
-import com.developer.ivan.datasources.RemoteDataSource
 import com.developer.ivan.domain.Beer
 import com.developer.ivan.domain.Either
 import com.developer.ivan.domain.Failure

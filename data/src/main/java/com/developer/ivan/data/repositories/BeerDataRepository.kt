@@ -1,7 +1,7 @@
 package com.developer.ivan.data.repositories
 
-import com.developer.ivan.datasources.LocalDataSource
-import com.developer.ivan.datasources.RemoteDataSource
+import com.developer.ivan.data.db.LocalDataSource
+import com.developer.ivan.data.server.datasources.RemoteDataSource
 import com.developer.ivan.domain.Beer
 import com.developer.ivan.domain.Either
 import com.developer.ivan.domain.Failure
