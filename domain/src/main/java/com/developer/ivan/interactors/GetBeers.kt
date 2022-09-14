@@ -11,7 +11,7 @@ class GetBeers(
     private val getBeerCount: GetBeerCount,
     private val beerRepository: BeerRepository
 ) :
-    Interactor<GetBeers.Params, List<Beer>>() {
+    Interactor<GetBeers.Params, List<Beer>> {
 
     override suspend fun execute(params: Params): Either<Failure, List<Beer>> =
         getBeerCount(Unit)

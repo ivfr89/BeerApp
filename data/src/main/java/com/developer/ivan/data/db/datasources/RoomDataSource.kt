@@ -1,9 +1,9 @@
 package com.developer.ivan.data.db.datasources
 
 import com.developer.ivan.data.db.DB
+import com.developer.ivan.data.db.LocalDataSource
 import com.developer.ivan.data.db.mapper.toDatabase
 import com.developer.ivan.data.db.mapper.toDomain
-import com.developer.ivan.datasources.LocalDataSource
 import com.developer.ivan.domain.Beer
 import com.developer.ivan.domain.Either
 import com.developer.ivan.domain.Failure
