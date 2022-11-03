@@ -38,8 +38,7 @@ class BeerDataRepository(
     override suspend fun getBeer(id: Int): Either<Failure, Beer> =
         localDataSource.getLocalBeer(id)
 
-    override suspend fun updateBeer(beer: Beer): Either.Right<Unit> {
-        localDataSource.updateBeer(beer)
-        return Either.Right(Unit)
+    override suspend fun updateBeer(beer: Beer): Either.Right<Beer> {
+        return localDataSource.updateBeer(beer).toRight()
     }
 }

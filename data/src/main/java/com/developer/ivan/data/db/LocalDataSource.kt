@@ -10,6 +10,6 @@ interface LocalDataSource {
     suspend fun getLocalBeer(id: Int): Either<Failure, Beer>
 
     suspend fun insertBeers(beers: List<Beer>)
-    suspend fun updateBeer(beer: Beer)
+    suspend fun updateBeer(beer: Beer): Beer
     suspend fun countBeers(): Int
 }
