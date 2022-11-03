@@ -36,8 +36,8 @@ class BeerFakeDataRepository : BeerRepository {
     override suspend fun getBeer(id: Int): Either<Failure, Beer> =
         beerFakeList.find { it.id == id }?.toRight() ?: Failure.NullResult.toLeft()
 
-    override suspend fun updateBeer(beer: Beer): Either.Right<Unit> {
+    override suspend fun updateBeer(beer: Beer): Either.Right<Beer> {
         beerFakeList = beerFakeList.map { if (it.id == beer.id) beer else it }
-        return Either.Right(Unit)
+        return Either.Right(beer)
     }
 }

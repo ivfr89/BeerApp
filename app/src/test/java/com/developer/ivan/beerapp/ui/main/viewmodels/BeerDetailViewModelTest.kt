@@ -80,7 +80,7 @@ class BeerDetailViewModelTest : ViewModelTest() {
 
         givenAnySuccessResponseOnUpdateBeer(expectedBeer)
 
-        viewModel.switchAvailability()
+        viewModel.switchAvailability(expectedId)
 
         verify {
             mockStateObserver.onChanged(ofType(BeerDetailState.ShowItem::class))
@@ -93,6 +93,6 @@ class BeerDetailViewModelTest : ViewModelTest() {
 
     private fun givenAnySuccessResponseOnUpdateBeer(beer: Beer) {
         coEvery { updateBeerInteractor(UpdateBeer.Params(beer)) } returns
-            Unit.toRight()
+            beer.toRight()
     }
 }

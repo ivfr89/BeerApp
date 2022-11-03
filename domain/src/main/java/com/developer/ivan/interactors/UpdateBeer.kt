@@ -6,9 +6,9 @@ import com.developer.ivan.domain.Failure
 import com.developer.ivan.repository.BeerRepository
 
 class UpdateBeer(private val beerRepository: BeerRepository) :
-    Interactor<UpdateBeer.Params, Unit> {
+    Interactor<UpdateBeer.Params, Beer> {
 
-    override suspend fun execute(params: Params): Either<Failure, Unit> =
+    override suspend fun execute(params: Params): Either<Failure, Beer> =
         beerRepository.updateBeer(params.beer)
 
     class Params(val beer: Beer)

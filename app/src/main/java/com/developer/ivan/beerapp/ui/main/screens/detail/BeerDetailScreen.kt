@@ -47,12 +47,14 @@ fun BeerDetailScreen(
     viewModel.getBeer(beerId)
 
     HandleObserverStates(
+        beerId = beerId,
         viewModel = viewModel
     )
 }
 
 @Composable
 fun HandleObserverStates(
+    beerId: Int,
     viewModel: BeerDetailViewModel
 ) {
     val state by viewModel.state.collectAsState()
@@ -77,7 +79,7 @@ fun HandleObserverStates(
                         tagline = item.tagline,
                         isAvailable = item.isAvailable,
                         onButtonSwitch = {
-                            viewModel.switchAvailability()
+                            viewModel.switchAvailability(beerId)
                         }
                     )
                     BeerInfoSection(stringResource(id = R.string.description), item.description)

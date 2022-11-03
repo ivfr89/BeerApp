@@ -37,8 +37,9 @@ class RoomDataSource(
             )
         }
 
-    override suspend fun updateBeer(beer: Beer) = withContext(Dispatchers.IO) {
+    override suspend fun updateBeer(beer: Beer): Beer = withContext(Dispatchers.IO) {
         database.beerDao().updateBeer(beer.toDatabase())
+        beer
     }
 
     override suspend fun countBeers(): Int = withContext(Dispatchers.IO) {

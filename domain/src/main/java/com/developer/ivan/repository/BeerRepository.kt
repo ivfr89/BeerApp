@@ -20,5 +20,5 @@ interface BeerRepository {
 
     suspend fun updateBeer(
         beer: Beer
-    ): Either.Right<Unit>
+    ): Either.Right<Beer>
 }
