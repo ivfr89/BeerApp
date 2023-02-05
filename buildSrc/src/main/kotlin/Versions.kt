@@ -32,7 +32,7 @@ object Versions {
     const val coroutines = "1.5.0"
 
     //dagger
-    const val hilt = "2.42"
+    const val hilt_comp = "2.42"
     const val hilt_lifecycle = "1.0.0-alpha03"
 
     //rangeSeekbar
@@ -139,7 +139,7 @@ object Versions {
         const val theme_adapter = "1.1.14"
         const val viewmodel = "2.5.1"
         const val shimmer = "1.0.3"
-        const val hilt = "1.0.0"
+        const val hilt_comp = "1.0.0"
         const val accompanist = "0.26.2-beta"
     }
 }

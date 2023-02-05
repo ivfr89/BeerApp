@@ -4,8 +4,8 @@ plugins {
     kotlin("kapt")
     id("kotlinx-serialization")
     id("kotlin-parcelize")
+    id("dagger.hilt.android.plugin")
 }
-apply(plugin = "dagger.hilt.android.plugin")
 
 @Suppress("UnstableApiUsage")
 android {
@@ -36,6 +36,7 @@ android {
         sourceCompatibility(Versions.compilerJavaVersion)
         targetCompatibility(Versions.compilerTargetCompatibility)
     }
+    hilt.enableExperimentalClasspathAggregation = true
 
     kotlinOptions {
         jvmTarget = Versions.jvmTargetVersion
@@ -48,15 +49,16 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.Compose.compilerVersion
     }
+    testOptions {
+        execution = "ANDROID_TEST_ORCHESTRATOR"
+    }
     namespace = "com.developer.ivan.beerapp"
 }
 
 dependencies {
     implementation(project(":androidbase"))
-    implementation(project(":data"))
-    implementation(project(":domain"))
+    implementation(project(":beer:ui"))
     implementation("androidx.navigation:navigation-testing:2.5.1")
-    androidTestImplementation(project(":data"))
     androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation("androidx.test:core:1.5.0-alpha02")
 //    implementation(project(":testShared"))
@@ -66,6 +68,8 @@ dependencies {
     implementFramework()
     implementCompose()
     testBase()
+    testImplementation(project(":beer:domain"))
+    testImplementation(project(":beer:ui"))
     androidTestCompose()
     debugImplementationCompose()
     androidTestFramework()

@@ -1,0 +1,37 @@
+plugins {
+    id("com.android.library")
+    id("kotlin-android")
+    id("kotlin-kapt")
+}
+
+apply(plugin = "dagger.hilt.android.plugin")
+
+android {
+
+    defaultConfig {
+        compileSdk = SetupConfig.compileSdkVersion
+        minSdk = SetupConfig.minSdkVersion
+    }
+}
+dependencies {
+
+    implementation(fileTree(mapOf(Pair("dir", "libs"), Pair("include", listOf("*.jar")))))
+
+    implementation(project(":beer:domain"))
+    implementation(project(":beer:data"))
+
+    implementCore()
+    implementFramework()
+    implementData()
+    kaptCore()
+    kaptData()
+    testBase()
+    testData()
+    androidTestCompose()
+    kaptAndroidTestFramework()
+}
+
+java {
+    sourceCompatibility = Versions.compilerJavaVersion
+    targetCompatibility = Versions.compilerTargetCompatibility
+}

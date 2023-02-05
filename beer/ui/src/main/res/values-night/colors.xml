@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="white">#FFFFFF</color>
+    <color name="whiteLow">#FFFDE7</color>
+    <color name="lightBlue">#5964d0</color>
+    <color name="veryLightBlue">#745964D0</color>
+
+    <color name="whiteTransparent">#74FFFFFF</color>
+    <color name="whiteLowTransparent">#74FFFDE7</color>
+
+    <color name="grayLight">#B8B8B8</color>
+
+    <color name="beerAvailable">#9DCC6E</color>
+    <color name="beerNotAvailable">#B8B8B8</color>
+
+    <color name="black_overlay">#66000000</color>
+</resources>
