@@ -1,7 +1,7 @@
 package com.developer.ivan.beerapp.di
 
 import com.developer.ivan.beerapp.fake.BeerFakeDataRepository
-import com.developer.ivan.data.di.DataModule
+import com.developer.ivan.di.DataModule
 import com.developer.ivan.repository.BeerRepository
 import dagger.Module
 import dagger.Provides

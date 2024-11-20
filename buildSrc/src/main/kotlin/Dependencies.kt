@@ -47,6 +47,7 @@ import Dependencies.Framework.hiltKapt
 import Dependencies.Framework.lifecycle
 import Dependencies.Framework.livedata
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.kotlin.dsl.project
 
 object Dependencies {
     object Compose {
@@ -92,7 +93,7 @@ object Dependencies {
             "androidx.navigation:navigation-compose:${Versions.navigation}"
 
         internal const val hiltNavigationCompose =
-            "androidx.hilt:hilt-navigation-compose:${Versions.Compose.hilt}"
+            "androidx.hilt:hilt-navigation-compose:${Versions.Compose.hilt_comp}"
 
         internal const val accompanistUiController =
             "com.google.accompanist:accompanist-systemuicontroller:${Versions.Compose.accompanist}"
@@ -109,13 +110,13 @@ object Dependencies {
 
         internal const val lifecycle =
             "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
-        internal const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
-        internal const val hiltKapt = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+        internal const val hilt = "com.google.dagger:hilt-android:${Versions.hilt_comp}"
+        internal const val hiltKapt = "com.google.dagger:hilt-android-compiler:${Versions.hilt_comp}"
         internal const val coreTesting = "androidx.arch.core:core-testing:${Versions.coretesting}"
         internal const val livedata =
             "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
         internal const val hiltAndroidTest =
-            "com.google.dagger:hilt-android-testing:${Versions.hilt}"
+            "com.google.dagger:hilt-android-testing:${Versions.hilt_comp}"
     }
 
     object Core {
@@ -217,6 +218,10 @@ fun DependencyHandler.implementFramework() {
 
 fun DependencyHandler.androidTestFramework() {
     add("androidTestImplementation", hiltAndroidTest)
+    add("androidTestImplementation", project(":beer:ui"))
+    add("androidTestImplementation", project(":beer:domain"))
+    add("androidTestImplementation", project(":beer:di"))
+    add("androidTestImplementation", project(":androidbase"))
 }
 
 fun DependencyHandler.kaptAndroidTestFramework() {

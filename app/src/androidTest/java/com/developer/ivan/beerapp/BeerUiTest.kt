@@ -11,14 +11,13 @@ import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import com.developer.ivan.ui.R
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.developer.ivan.beerapp.androidbase.theme.BeerAppTheme
 import com.developer.ivan.beerapp.fake.beerFakeList
-import com.developer.ivan.beerapp.ui.main.BeerApp
-import com.developer.ivan.beerapp.ui.main.MainActivity
-import com.developer.ivan.beerapp.ui.main.screens.list.BEER_LIST_TAG
 import com.developer.ivan.beerapp.utils.waitUntilExists
 import com.developer.ivan.domain.Beer
+import com.developer.ivan.ui.main.screens.list.BEER_LIST_TAG
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Before

@@ -3,13 +3,13 @@ package com.developer.ivan.beerapp.ui.main.viewmodels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import com.developer.ivan.beerapp.model.BeerMother
-import com.developer.ivan.beerapp.ui.main.screens.list.BeerListState
-import com.developer.ivan.beerapp.ui.main.screens.list.BeerListViewModel
 import com.developer.ivan.beerapp.utils.ViewModelTest
 import com.developer.ivan.domain.Failure
 import com.developer.ivan.domain.toLeft
 import com.developer.ivan.domain.toRight
 import com.developer.ivan.interactors.GetBeers
+import com.developer.ivan.ui.main.screens.list.BeerListState
+import com.developer.ivan.ui.main.screens.list.BeerListViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verify

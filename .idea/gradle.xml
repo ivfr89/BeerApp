@@ -14,9 +14,12 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/androidbase" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/beer" />
+            <option value="$PROJECT_DIR$/beer/data" />
+            <option value="$PROJECT_DIR$/beer/di" />
+            <option value="$PROJECT_DIR$/beer/domain" />
+            <option value="$PROJECT_DIR$/beer/ui" />
             <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/data" />
-            <option value="$PROJECT_DIR$/domain" />
           </set>
         </option>
       </GradleProjectSettings>
